@@ -1219,12 +1219,15 @@
     .cta-band-inner {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: 1.5fr 1fr;
+      /* vasen = CTA, oikea = CONTACT */
+      gap: 2rem;
+      align-items: stretch;
     }
 
+    /* Mobiilissa allekkain */
     @media (max-width: 960px) {
-      .cta-band {
+      .cta-band-inner {
         grid-template-columns: minmax(0, 1fr);
       }
     }

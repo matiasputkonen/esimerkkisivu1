@@ -1281,70 +1281,60 @@
       /* sama kuin muu tausta */
     }
 
-    .footer-inner {
-      max-width: 1500px;
+    .footer-band {
+      max-width: 1100px;
       margin: 0 auto;
-      width: 100%;
+      border-radius: 1.8rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: radial-gradient(circle at bottom left,
+          rgba(160, 77, 238, 0.18),
+          rgba(15, 23, 42, 0.98));
+      padding: 1.6rem 1.8rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
     }
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
+    .footer-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left,
+          rgba(160, 77, 238, 0.22), transparent 60%),
+        radial-gradient(circle at bottom right,
+          rgba(56, 189, 248, 0.12), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.85;
     }
 
-    .footer-links a {
-      color: var(--muted-soft);
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--text);
-    }
-
-    .footer-column {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      min-width: 180px;
-    }
-
-    .footer-column h4 {
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .footer-column ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .footer-column ul li {
-      color: var(--muted-soft);
+    .footer-inner {
+      position: relative;
+      /* jotta glow jää taustalle */
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem 2rem;
       font-size: 0.8rem;
+      color: var(--muted-soft);
     }
 
-    .footer-contact span {
-      color: var(--muted);
+    @media (max-width: 960px) {
+      .footer-inner {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
-    .footer-cert ul li::before {
-      content: "✓";
-      margin-right: 6px;
-      color: var(--accent);
-      font-weight: bold;
+    @media (max-width: 640px) {
+      .footer-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .footer-bottom {
-      margin-top: 1.5rem;
+      position: relative;
+      margin-top: 1.4rem;
       padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(148, 163, 184, 0.25);
       text-align: center;
       color: var(--muted);
       font-size: 0.75rem;

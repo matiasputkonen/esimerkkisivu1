@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Layout Showcase – Senior IT Architect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --bg: #05070b;
+      --bg-alt: #0b1118;
+      --bg-alt-2: #0f1724;
+      --card: #111827;
+      --card-soft: #182235;
+      --accent: #4ade80;
+      --accent-soft: rgba(74, 222, 128, 0.12);
+      --accent-2: #38bdf8;
+      --border: #1f2937;
+      --border-soft: #111827;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --muted-soft: #6b7280;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+      --radius-md: 0.75rem;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
+      --shadow-subtle: 0 12px 30px rgba(15, 23, 42, 0.7);
+      --gap-xl: 3.5rem;
+      --gap-lg: 2.5rem;
+      --gap-md: 1.5rem;
+      --gap-sm: 1rem;
+      --container: min(1200px, 100% - 3rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 40%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Global layout primitives */
+
+    .container {
+      width: var(--container);
+      margin-inline: auto;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-md);
+    }
+
+    .stack-lg {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-lg);
+    }
+
+    .stack-xl {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-xl);
+    }
+
+    .cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cluster-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--gap-md);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .grid-auto-fit {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    @media (max-width: 960px) {
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-layout,
+      .two-column,
+      .split-layout {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+    }
+
+    /* Surfaces */
+
+    .surface {
+      background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+    }
+
+    .surface-alt {
+      background: radial-gradient(circle at bottom right, #020617 0, #020617 55%, #030712 100%);
+    }
+
+    .section {
+      padding-block: 4.5rem;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.85);
+    }
+
+    .section-soft {
+      padding-block: 4.5rem;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-subtle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-outline {
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(75, 85, 99, 0.4);
+      padding: 1.75rem;
+      background: radial-gradient(circle at top right, #020617 0, #020617 65%, #020617 100%);
+      position: relative;
+    }
+
+    .card-ghost {
+      border-radius: var(--radius-xl);
+      border: 1px dashed rgba(75, 85, 99, 0.4);
+      padding: 1.75rem;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.3));
+      position: relative;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--muted);
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+    }
+
+    .pill-accent {
+      border-color: rgba(74, 222, 128, 0.6);
+      background: linear-gradient(90deg, rgba(22, 163, 74, 0.12), rgba(37, 99, 235, 0.06));
+      color: var(--accent);
+    }
+
+    /* Typography */
+
+    h1, h2, h3, h4 {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 3.2rem);
+      line-height: 1.05;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3vw, 2.1rem);
+      line-height: 1.15;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .body-lg {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    .body-sm {
+      font-size: 0.85rem;
+      color: var(--muted-soft);
+    }
+
+    .text-muted {
+      color: var(--muted);
+    }
+
+    .text-accent {
+      color: var(--accent);
+    }
+
+    .text-soft {
+      color: rgba(209, 213, 219, 0.9);
+    }
+
+    /* Header & nav */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(2, 6, 23, 0.96),
+        rgba(2, 6, 23, 0.85),
+        transparent
+      );
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-inner {
+      padding-block: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.9rem;
+      background: conic-gradient(
+        from 140deg,
+        #22c55e,
+        #22c55e,
+        #38bdf8,
+        #6366f1,
+        #22c55e
+      );
+      position: relative;
+      box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
+    }
+
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, #020617, #020617 65%);
+    }
+
+    .brand-label {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-label span:first-child {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand-label span:last-child {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta {
+      padding: 0.4rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+    }
+
+    .nav-cta:hover {
+      border-color: rgba(74, 222, 128, 0.8);
+      box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.35);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Hero */
+
+    .hero {
+      padding-block: 4.5rem 4rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-title-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .hero-kpi-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.85));
+      color: var(--muted);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #22c55e 50%, transparent 100%);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a 40%, #22c55e 80%);
+      box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
+      color: #022c22;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 45px rgba(34, 197, 94, 0.55);
+    }
+
+    .btn-ghost {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.86));
+      border-color: rgba(75, 85, 99, 0.8);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(148, 163, 184, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .hero-matrix {
+      position: relative;
+      border-radius: 1.8rem;
+      padding: 1.75rem;
+      background: radial-gradient(circle at top left, #22c55e0d, #0b1120 60%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .hero-matrix::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(74, 222, 128, 0.11), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.09), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .hero-matrix-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.5rem;
+    }
+
+    .matrix-block {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: 1.15rem;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .matrix-card {
+      border-radius: 1.1rem;
+      padding: 0.85rem 0.9rem;
+      background: linear-gradient(
+        145deg,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.7)
+      );
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .matrix-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .matrix-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .matrix-value-soft {
+      font-size: 0.8rem;
+      color: var(--muted-soft);
+    }
+
+    .matrix-chart {
+      border-radius: 1.3rem;
+      padding: 1.1rem 1.1rem 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.9));
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.8rem;
+    }
+
+    .chart-bars {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: flex-end;
+      gap: 0.25rem;
+      height: 120px;
+    }
+
+    .chart-bar {
+      border-radius: 999px;
+      background: linear-gradient(180deg, #22c55e, #22c55eaa);
+    }
+
+    .chart-bar-alt {
+      background: linear-gradient(180deg, #38bdf8, #38bdf8aa);
+    }
+
+    .chart-bar-muted {
+      background: linear-gradient(180deg, #374151, #111827);
+    }
+
+    .chart-axis {
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-matrix-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Section headers */
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .section-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 720px) {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-meta {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Layout gallery */
+
+    .layout-gallery {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .layout-split {
+      display: grid;
+      grid-template-rows: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 1rem;
+    }
+
+    .layout-preview {
+      border-radius: 1.4rem;
+      padding: 1.4rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, #0f172a, #020617 70%);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 1rem;
+    }
+
+    .layout-status-bar {
+      border-radius: 999px;
+      padding: 0.4rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+    }
+
+    .status-dot.green {
+      background: #22c55e;
+      box-shadow: 0 0 9px rgba(34, 197, 94, 0.7);
+    }
+
+    .status-dot.blue {
+      background: #38bdf8;
+      box-shadow: 0 0 9px rgba(56, 189, 248, 0.7);
+    }
+
+    .status-dot.amber {
+      background: #fbbf24;
+      box-shadow: 0 0 9px rgba(251, 191, 36, 0.7);
+    }
+
+    .browser-chrome {
+      border-radius: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      padding: 0.9rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.75rem;
+    }
+
+    .browser-tabs {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--muted-soft);
+    }
+
+    .browser-tab {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .browser-tab.active {
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), rgba(15, 23, 42, 0.96));
+      border-color: rgba(74, 222, 128, 0.7);
+      color: var(--text);
+    }
+
+    .browser-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 0.75rem;
+      height: 100%;
+    }
+
+    .browser-col {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.6rem;
+    }
+
+    .placeholder-block {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.8));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .placeholder-block::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        120deg,
+        transparent 0,
+        transparent 35%,
+        rgba(55, 65, 81, 0.55) 50%,
+        transparent 65%,
+        transparent 100%
+      );
+      transform: translateX(-100%);
+      animation: shimmer 3.5s infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes shimmer {
+      to {
+        transform: translateX(100%);
+      }
+    }
+
+    .placeholder-inner {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .line {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #1f2937, #020617);
+    }
+
+    .line-short {
+      width: 45%;
+    }
+
+    .line-mid {
+      width: 65%;
+    }
+
+    .line-full {
+      width: 100%;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.2rem;
+    }
+
+    .mini-pill {
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+      background: radial-gradient(circle at top left, #020617, #020617);
+    }
+
+    @media (max-width: 960px) {
+      .layout-gallery {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .browser-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Portfolio grid */
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    @media (max-width: 1024px) {
+      .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .portfolio-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .portfolio-card {
+      border-radius: 1.4rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, rgba(17, 24, 39, 1), rgba(15, 23, 42, 1));
+      padding: 1rem;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-thumb {
+      border-radius: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      padding: 0.7rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.5rem;
+    }
+
+    .thumb-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+    }
+
+    .thumb-body {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0.4rem;
+    }
+
+    .thumb-block-main,
+    .thumb-block-side {
+      border-radius: 0.8rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-block-main::before,
+    .thumb-block-side::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        45deg,
+        rgba(37, 99, 235, 0.2),
+        transparent 40%,
+        transparent 60%,
+        rgba(34, 197, 94, 0.18)
+      );
+      mix-blend-mode: screen;
+      opacity: 0.7;
+    }
+
+    .thumb-lines {
+      position: relative;
+      padding: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .tag {
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--muted-soft);
+    }
+
+    .card-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .link-pill {
+      font-size: 0.78rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      background: radial-gradient(circle at top left, #020617, #020617);
+      transition: border 0.12s ease, color 0.12s ease, transform 0.12s ease;
+    }
+
+    .link-pill:hover {
+      border-color: rgba(74, 222, 128, 0.8);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    /* Timeline layout */
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.3fr 1.7fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 960px) {
+      .timeline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .timeline-rail {
+      position: relative;
+      padding-top: 0.4rem;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #22c55e, #38bdf8);
+      opacity: 0.65;
+    }
+
+    .timeline-marker {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-marker-circle {
+      position: absolute;
+      left: 0;
+      top: 0.2rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 2px solid rgba(163, 230, 53, 0.9);
+      background: radial-gradient(circle, #22c55e, transparent 65%);
+      box-shadow: 0 0 13px rgba(34, 197, 94, 0.7);
+    }
+
+    .timeline-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted-soft);
+    }
+
+    .timeline-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .timeline-card {
+      border-radius: 1.3rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 1.25rem;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 960px) {
+      .timeline-card {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .timeline-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .level-pill {
+      padding: 0.24rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 222, 128, 0.7);
+      font-size: 0.72rem;
+      color: var(--accent);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    /* Dashboard style layout */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sidebar-nav {
+      border-radius: 1.5rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      padding: 1.1rem;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 1rem;
+    }
+
+    .sidebar-section {
+      border-radius: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 0.8rem;
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+    }
+
+    .sidebar-link-list {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.7rem;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+
+    .sidebar-link.active {
+      border-color: rgba(74, 222, 128, 0.75);
+      background: radial-gradient(circle at left, rgba(34, 197, 94, 0.16), rgba(15, 23, 42, 0.95));
+      color: var(--text);
+    }
+
+    .main-panel {
+      border-radius: 1.7rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 1.3rem;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 1.1rem;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.86rem;
+    }
+
+    .panel-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .filter-pill {
+      padding: 0.24rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 0.78rem;
+      color: var(--muted-soft);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .filter-pill.active {
+      border-color: rgba(59, 130, 246, 0.8);
+      color: var(--accent-2);
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1024px) {
+      .board-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .board-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .board-column {
+      border-radius: 1.1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+      padding: 0.85rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.6rem;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--muted-soft);
+    }
+
+    .ticket-list {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .ticket-card {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 0.7rem;
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      display: grid;
+      gap: 0.3rem;
+    }
+
+    .ticket-title-line {
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #4ade80, #22c55e);
+      width: 75%;
+    }
+
+    .ticket-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+    }
+
+    /* CTA section */
+
+    .cta-band {
+      border-radius: 1.8rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: radial-gradient(circle at top left, rgba(22, 163, 74, 0.18), rgba(15, 23, 42, 0.98));
+      padding: 1.6rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .cta-band-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 960px) {
+      .cta-band,
+      .cta-band-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .cta-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .cta-matrix {
+      border-radius: 1.1rem;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, #020617, #020617 75%);
+      padding: 0.9rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 720px) {
+      .cta-matrix {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .metric-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--muted-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Footer */
+
+    .site-footer {
+      border-top: 1px solid rgba(15, 23, 42, 1);
+      padding-block: 2rem;
+      margin-top: 2rem;
+      background: radial-gradient(circle at bottom, #020617, #020617 60%);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted-soft);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      color: var(--muted-soft);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* Utility */
+
+    .mt-sm { margin-top: 0.5rem; }
+    .mt-md { margin-top: 1rem; }
+    .mt-lg { margin-top: 1.5rem; }
+    .mt-xl { margin-top: 2rem; }
+
+    .sep {
+      height: 1px;
+      background: radial-gradient(circle at center, rgba(55, 65, 81, 0.9), transparent);
+      margin-block: 1rem;
+    }
+  </style>
+</head>
+<body class="surface">
+  <div class="page-shell">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container nav-inner">
+        <a href="#top" class="brand">
+          <div class="brand-logo" aria-hidden="true"></div>
+          <div class="brand-label">
+            <span>Layout systems</span>
+            <span>Senior IT Architect</span>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Päänavigaatio">
+          <a href="#layouts">Layouts</a>
+          <a href="#portfolio">Portfolio grid</a>
+          <a href="#timeline">Delivery flow</a>
+          <a href="#dashboard">Dashboard UI</a>
+          <a href="#contact" class="nav-cta">
+            <span>Request demo</span>
+            <span>↗</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-tagline">
+            <div class="chip">
+              <span class="chip-dot"></span>
+              <span>End-to-end layout architecture</span>
+            </div>
+
+            <div class="hero-title-row">
+              <h1>Composed layouts for complex digital products.</h1>
+              <p class="body-lg">
+                Minimal content, maximal structure. Sectioned, grid-based, dashboard-like and marketing-grade layouts in a single cohesive system.
+              </p>
+            </div>
+
+            <div class="hero-cta-row">
+              <a href="#layouts" class="btn btn-primary">
+                <span>Explore layout gallery</span>
+                <span>↓</span>
+              </a>
+              <a href="#portfolio" class="btn btn-ghost">
+                <span>View project tiles</span>
+              </a>
+            </div>
+
+            <div class="hero-kpi-row">
+              <div>
+                <div class="eyebrow">Pattern library</div>
+                <div class="text-soft">Hero + marketing + dashboard + timeline in one static HTML asset.</div>
+              </div>
+              <div>
+                <div class="eyebrow">Focus</div>
+                <div class="text-soft">Responsive grid and flex alignment, minimal placeholder text.</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-matrix" aria-label="Layout summary">
+            <div class="hero-matrix-inner">
+              <div class="matrix-block">
+                <div class="matrix-row">
+                  <div class="matrix-card">
+                    <div class="matrix-label">Page systems</div>
+                    <div class="matrix-value">Landing / App / Dashboard</div>
+                    <div class="matrix-value-soft">Single HTML, multiple layout archetypes.</div>
+                  </div>
+                  <div class="matrix-card">
+                    <div class="matrix-label">Grids</div>
+                    <div class="matrix-value">Auto-fit, 2–4 cols</div>
+                    <div class="matrix-value-soft">Cards, split layouts, timeline, kanban.</div>
+                  </div>
+                  <div class="matrix-card">
+                    <div class="matrix-label">Density</div>
+                    <div class="matrix-value">Low copy</div>
+                    <div class="matrix-value-soft">Structure over content.</div>
+                  </div>
+                </div>
+
+                <div class="matrix-row">
+                  <div class="matrix-card">
+                    <div class="matrix-label">Viewports</div>
+                    <div class="matrix-value">≥ 360px</div>
+                    <div class="matrix-value-soft">Breakpoints at 720 / 960 / 1024.</div>
+                  </div>
+                  <div class="matrix-card">
+                    <div class="matrix-label">Surface style</div>
+                    <div class="matrix-value">Dark / Neon</div>
+                    <div class="matrix-value-soft">Portfolio-ready visual identity.</div>
+                  </div>
+                  <div class="matrix-card">
+                    <div class="matrix-label">Usage</div>
+                    <div class="matrix-value">Static showcase</div>
+                    <div class="matrix-value-soft">Split into pages or keep one.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="matrix-chart">
+                <div class="cluster-between">
+                  <div class="body-sm text-muted">Layout complexity heatmap</div>
+                  <div class="body-sm text-accent">Hero / Portfolio / Timeline / Dashboard</div>
+                </div>
+                <div class="chart-bars" aria-hidden="true">
+                  <div class="chart-bar" style="height: 92%;"></div>
+                  <div class="chart-bar" style="height: 88%;"></div>
+                  <div class="chart-bar-alt" style="height: 70%;"></div>
+                  <div class="chart-bar" style="height: 85%;"></div>
+                  <div class="chart-bar-muted" style="height: 45%;"></div>
+                  <div class="chart-bar-alt" style="height: 78%;"></div>
+                  <div class="chart-bar" style="height: 95%;"></div>
+                  <div class="chart-bar-muted" style="height: 40%;"></div>
+                  <div class="chart-bar-alt" style="height: 72%;"></div>
+                  <div class="chart-bar" style="height: 83%;"></div>
+                  <div class="chart-bar-muted" style="height: 38%;"></div>
+                  <div class="chart-bar" style="height: 90%;"></div>
+                </div>
+                <div class="chart-axis">
+                  <span>Landing</span>
+                  <span>Portfolio</span>
+                  <span>Dashboard</span>
+                  <span>System</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Layout gallery -->
+      <section id="layouts" class="section-soft">
+        <div class="container stack-xl">
+          <header class="section-header">
+            <div class="section-title-block">
+              <span class="eyebrow">Layout gallery</span>
+              <h2>Hero, split, and marketing grids in one combined frame.</h2>
+              <p class="body-lg">
+                Use each block as a base pattern. Duplicate rows and columns to scale to any required line count.
+              </p>
+            </div>
+            <div class="section-meta">
+              <span class="pill">Static HTML + embedded CSS</span>
+              <span class="pill pill-accent">No JS, layout-first design</span>
+            </div>
+          </header>
+
+          <div class="layout-gallery">
+            <div class="layout-split">
+              <div class="layout-preview">
+                <div class="layout-status-bar">
+                  <div class="cluster">
+                    <div class="status-dot green"></div>
+                    <span>Landing-grid</span>
+                  </div>
+                  <div class="cluster">
+                    <span>Hero / Feature / CTA</span>
+                  </div>
+                </div>
+
+                <div class="grid two-column" style="margin-top: 1rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem;">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-mid"></div>
+                      <div class="line line-full"></div>
+                      <div class="line line-short"></div>
+                      <div class="pill-row">
+                        <span class="mini-pill">Primary CTA</span>
+                        <span class="mini-pill">Secondary</span>
+                        <span class="mini-pill">Ghost button</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid" style="gap: 0.7rem;">
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-short"></div>
+                        <div class="line line-mid"></div>
+                      </div>
+                    </div>
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-short"></div>
+                        <div class="line line-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="layout-preview">
+                <div class="layout-status-bar">
+                  <div class="cluster">
+                    <div class="status-dot blue"></div>
+                    <span>Split-content</span>
+                  </div>
+                  <div class="cluster">
+                    <span>Case layout</span>
+                  </div>
+                </div>
+
+                <div class="grid" style="margin-top: 1rem; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="grid" style="grid-template-rows: auto auto; gap: 0.7rem;">
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-mid"></div>
+                        <div class="line line-short"></div>
+                      </div>
+                    </div>
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-full"></div>
+                        <div class="line line-mid"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="card-outline stack-lg">
+              <div class="stack">
+                <span class="eyebrow">Pattern usage</span>
+                <h3>Turn blocks into standalone pages.</h3>
+                <p class="body-sm">
+                  Each pattern is a complete, self-contained layout fragment. Copy, paste, and extend to build standalone hero pages, marketing pages, or app shells.
+                </p>
+              </div>
+
+              <div class="grid grid-auto-fit">
+                <div class="card-ghost">
+                  <div class="body-sm text-soft">
+                    Hero + feature section. Use as top-level layout for SaaS or consulting pages.
+                  </div>
+                  <div class="sep"></div>
+                  <div class="body-sm text-muted">Archetype: <strong>Landing</strong></div>
+                </div>
+                <div class="card-ghost">
+                  <div class="body-sm text-soft">
+                    Split-content layout. Perfect for case studies or product detail views.
+                  </div>
+                  <div class="sep"></div>
+                  <div class="body-sm text-muted">Archetype: <strong>Case / Story</strong></div>
+                </div>
+                <div class="card-ghost">
+                  <div class="body-sm text-soft">
+                    Shimmer placeholders highlight grid structure instead of words.
+                  </div>
+                  <div class="sep"></div>
+                  <div class="body-sm text-muted">Focus: <strong>Asettelu</strong></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio cards -->
+      <section id="portfolio" class="section">
+        <div class="container stack-xl">
+          <header class="section-header">
+            <div class="section-title-block">
+              <span class="eyebrow">Portfolio grid</span>
+              <h2>Project tiles with nested layout previews.</h2>
+              <p class="body-lg">
+                Each tile is a miniature page: browser chrome, grid, cards, and tags. Duplicate rows to scale line count and visual density.
+              </p>
+            </div>
+            <div class="section-meta">
+              <span class="pill">Grid 3 → 2 → 1</span>
+              <span class="pill">Nested compositions</span>
+            </div>
+          </header>
+
+          <div class="portfolio-grid">
+            <!-- Tile 1 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Marketing layout</span>
+                  <span>Landing</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-full"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>Landing system</h3>
+                <div class="tag-row">
+                  <span class="tag">Hero</span>
+                  <span class="tag">Feature grid</span>
+                  <span class="tag">CTA band</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Use as default marketing page structure.</span>
+                <a href="#layouts" class="link-pill">
+                  <span>View pattern</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Tile 2 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Dashboard layout</span>
+                  <span>Web app</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>App shell</h3>
+                <div class="tag-row">
+                  <span class="tag">Sidebar</span>
+                  <span class="tag">Top bar</span>
+                  <span class="tag">Kanban</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Static HTML, dashboard-like structure.</span>
+                <a href="#dashboard" class="link-pill">
+                  <span>Open dashboard</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Tile 3 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Timeline layout</span>
+                  <span>Process</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-full"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>Delivery timeline</h3>
+                <div class="tag-row">
+                  <span class="tag">Rail</span>
+                  <span class="tag">Markers</span>
+                  <span class="tag">Cards</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Explain delivery flow visually.</span>
+                <a href="#timeline" class="link-pill">
+                  <span>See timeline</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Tile 4 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Case layout</span>
+                  <span>Story</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>Case detail</h3>
+                <div class="tag-row">
+                  <span class="tag">Split</span>
+                  <span class="tag">Headline block</span>
+                  <span class="tag">Aside</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Good for one-page story layouts.</span>
+                <a href="#layouts" class="link-pill">
+                  <span>Reuse pattern</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </article>
+
+            <!-- Tile 5 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Grid variants</span>
+                  <span>System</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-mid"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>Grid library</h3>
+                <div class="tag-row">
+                  <span class="tag">2-col</span>
+                  <span class="tag">3-col</span>
+                  <span class="tag">Auto-fit</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Demonstrate layout versatility.</span>
+                <span class="body-sm text-muted">Extend with more breakpoints.</span>
+              </div>
+            </article>
+
+            <!-- Tile 6 -->
+            <article class="portfolio-card">
+              <div class="portfolio-thumb">
+                <div class="thumb-header">
+                  <span>Contact layout</span>
+                  <span>CTA</span>
+                </div>
+                <div class="thumb-body">
+                  <div class="thumb-block-main">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="thumb-block-side">
+                    <div class="thumb-lines">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stack">
+                <h3>Contact band</h3>
+                <div class="tag-row">
+                  <span class="tag">Form</span>
+                  <span class="tag">Meta info</span>
+                </div>
+              </div>
+
+              <div class="card-footer-row">
+                <span class="body-sm text-muted">Paired with CTA metrics below.</span>
+                <a href="#contact" class="link-pill">
+                  <span>Scroll to contact</span>
+                  <span>↓</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline -->
+      <section id="timeline" class="section-soft">
+        <div class="container stack-xl">
+          <header class="section-header">
+            <div class="section-title-block">
+              <span class="eyebrow">Delivery timeline</span>
+              <h2>Step-based rail with markers and dual-column cards.</h2>
+              <p class="body-lg">
+                Use this to visualise your engagement model: discovery, architecture, delivery, and handover. Again, copy cards to grow detail.
+              </p>
+            </div>
+            <div class="section-meta">
+              <span class="pill">Left rail</span>
+              <span class="pill">Right grid</span>
+            </div>
+          </header>
+
+          <div class="timeline">
+            <aside class="timeline-rail" aria-hidden="true">
+              <div class="timeline-line"></div>
+              <div class="timeline-marker">
+                <div class="timeline-marker-circle"></div>
+                <div class="timeline-label">Phase markers</div>
+                <div class="body-sm text-soft">
+                  One marker per phase. Add new markers as needed to scale the process.
+                </div>
+              </div>
+              <div class="timeline-marker">
+                <div class="timeline-marker-circle"></div>
+                <div class="timeline-label">Delivery checkpoints</div>
+                <div class="body-sm text-soft">
+                  Each card on the right references a marker here.
+                </div>
+              </div>
+            </aside>
+
+            <div class="timeline-grid">
+              <!-- Card 1 -->
+              <article class="timeline-card">
+                <div class="stack">
+                  <div class="eyebrow">01 – Discovery</div>
+                  <h3>Context framing</h3>
+                  <p class="body-sm">
+                    High-level constraints, target platforms, and systemic requirements captured in a compact grid.
+                  </p>
+                  <div class="timeline-badge-row">
+                    <span class="mini-pill">System map</span>
+                    <span class="mini-pill">Stakeholder grid</span>
+                    <span class="level-pill">Architect-led</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-mid"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="timeline-card">
+                <div class="stack">
+                  <div class="eyebrow">02 – Architecture</div>
+                  <h3>Layout system design</h3>
+                  <p class="body-sm">
+                    Mapping page templates, component primitives, and breakpoint rules into a single layout language.
+                  </p>
+                  <div class="timeline-badge-row">
+                    <span class="mini-pill">Templates</span>
+                    <span class="mini-pill">Components</span>
+                    <span class="mini-pill">Tokens</span>
+                    <span class="level-pill">Systemic</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-full"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="timeline-card">
+                <div class="stack">
+                  <div class="eyebrow">03 – Implementation</div>
+                  <h3>Static build</h3>
+                  <p class="body-sm">
+                    Delivering HTML/CSS shells that can be wired to any front-end framework or CMS.
+                  </p>
+                  <div class="timeline-badge-row">
+                    <span class="mini-pill">Static assets</span>
+                    <span class="mini-pill">No JS</span>
+                    <span class="mini-pill">Framework agnostic</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="timeline-card">
+                <div class="stack">
+                  <div class="eyebrow">04 – Handover</div>
+                  <h3>Integration-ready spec</h3>
+                  <p class="body-sm">
+                    Annotated breakpoints, spacing rules, and component states, expressed as layouts not prose.
+                  </p>
+                  <div class="timeline-badge-row">
+                    <span class="mini-pill">Annotation</span>
+                    <span class="mini-pill">Breakpoints</span>
+                    <span class="mini-pill">Dev-ready</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-short"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-mid"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard / App layout -->
+      <section id="dashboard" class="section">
+        <div class="container stack-xl">
+          <header class="section-header">
+            <div class="section-title-block">
+              <span class="eyebrow">Dashboard layout</span>
+              <h2>Sidebar navigation, filters, and kanban-style board.</h2>
+              <p class="body-lg">
+                App-like layout without any JavaScript. Use it to demonstrate how your static architecture maps to real product UIs.
+              </p>
+            </div>
+            <div class="section-meta">
+              <span class="pill">Sidebar / Header / Board</span>
+              <span class="pill">3× column kanban</span>
+            </div>
+          </header>
+
+          <div class="dashboard-grid">
+            <aside class="sidebar-nav">
+              <div class="sidebar-section">
+                <div class="body-sm text-soft">Navigation</div>
+                <div class="sep"></div>
+                <div class="sidebar-link-list">
+                  <div class="sidebar-link active">
+                    <span>Overview</span>
+                    <span>•</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>Layouts</span>
+                    <span>→</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>Components</span>
+                    <span>→</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>System</span>
+                    <span>→</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sidebar-section">
+                <div class="body-sm text-soft">States</div>
+                <div class="sep"></div>
+                <div class="sidebar-link-list">
+                  <div class="sidebar-link">
+                    <span>In design</span>
+                    <span>12</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>In review</span>
+                    <span>6</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>Shipped</span>
+                    <span>24</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sidebar-section">
+                <div class="body-sm text-soft">Breakpoints</div>
+                <div class="sep"></div>
+                <div class="sidebar-link-list">
+                  <div class="sidebar-link">
+                    <span>≥ 1200px</span>
+                    <span>Desktop</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>≥ 960px</span>
+                    <span>Large</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>≥ 720px</span>
+                    <span>Tablet</span>
+                  </div>
+                  <div class="sidebar-link">
+                    <span>&lt; 720px</span>
+                    <span>Mobile</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+
+            <section class="main-panel">
+              <header class="panel-header">
+                <div class="stack">
+                  <span class="eyebrow">Board view</span>
+                  <div class="cluster">
+                    <span class="body-sm text-soft">Static HTML kanban board.</span>
+                  </div>
+                </div>
+                <div class="panel-filters">
+                  <span class="filter-pill active">All layouts</span>
+                  <span class="filter-pill">Marketing</span>
+                  <span class="filter-pill">Dashboard</span>
+                  <span class="filter-pill">System</span>
+                </div>
+              </header>
+
+              <div class="browser-chrome">
+                <div class="browser-tabs">
+                  <span class="browser-tab active">Board</span>
+                  <span class="browser-tab">Timeline</span>
+                  <span class="browser-tab">Metrics</span>
+                </div>
+                <div class="board-grid mt-sm">
+                  <!-- Column 1 -->
+                  <div class="board-column">
+                    <div class="column-header">
+                      <span>Backlog</span>
+                      <span>4</span>
+                    </div>
+                    <div class="ticket-list">
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Hero refactor</span>
+                          <span>Landing</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Card density</span>
+                          <span>Grid</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Footer variants</span>
+                          <span>System</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Form layout</span>
+                          <span>Contact</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Column 2 -->
+                  <div class="board-column">
+                    <div class="column-header">
+                      <span>In progress</span>
+                      <span>3</span>
+                    </div>
+                    <div class="ticket-list">
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Dashboard shell</span>
+                          <span>App</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Timeline rail</span>
+                          <span>Process</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>CTA band</span>
+                          <span>Marketing</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Column 3 -->
+                  <div class="board-column">
+                    <div class="column-header">
+                      <span>Shipped</span>
+                      <span>6</span>
+                    </div>
+                    <div class="ticket-list">
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Portfolio grid</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Hero pattern</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Timeline</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Contact layout</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Navigation</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Footer</span>
+                          <span>Live</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="panel-header">
+                <span class="body-sm text-muted">All interactions are implied, no JavaScript – pure structural showcase.</span>
+                <span class="body-sm text-muted">Extend columns or tickets to increase density.</span>
+              </footer>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA & Contact -->
+      <section id="contact" class="section-soft">
+        <div class="container stack-xl">
+          <header class="section-header">
+            <div class="section-title-block">
+              <span class="eyebrow">Contact & metrics</span>
+              <h2>CTA band combined with a compact contact layout.</h2>
+              <p class="body-lg">
+                Final block combines a marketing CTA, small metric grid, and a simple contact form layout. This closes the “full page” story.
+              </p>
+            </div>
+            <div class="section-meta">
+              <span class="pill">CTA band</span>
+              <span class="pill">2-col contact</span>
+            </div>
+          </header>
+
+          <section class="cta-band">
+            <div class="cta-band-inner">
+              <div class="cta-copy">
+                <span class="chip">
+                  <span class="chip-dot"></span>
+                  <span>Static architecture sample</span>
+                </span>
+                <h3>Need a layout-first HTML baseline?</h3>
+                <p class="body-sm">
+                  This single file already contains multiple page types. Split it into individual documents, wire it to your stack, or use it as a visual deliverable in proposals.
+                </p>
+                <div class="hero-cta-row mt-sm">
+                  <a href="#top" class="btn btn-primary">
+                    <span>Jump to hero</span>
+                  </a>
+                  <a href="#portfolio" class="btn btn-ghost">
+                    <span>Revisit portfolio grid</span>
+                  </a>
+                </div>
+
+                <div class="cta-matrix mt-md">
+                  <div class="metric-block">
+                    <span class="metric-label">Page archetypes</span>
+                    <span class="metric-value">4 core types</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Grid variants</span>
+                    <span class="metric-value">2 / 3 / 4 / auto-fit</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Patterns</span>
+                    <span class="metric-value">Hero, cards, rail, board</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Tech</span>
+                    <span class="metric-value">HTML + CSS only</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Focus</span>
+                    <span class="metric-value">Asettelu</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Scalability</span>
+                    <span class="metric-value">Duplicate blocks → +10k linhas</span>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="card-outline stack-lg">
+                <div class="stack">
+                  <span class="eyebrow">Contact layout</span>
+                  <h3>Form shell (no backend wired).</h3>
+                  <p class="body-sm">
+                    Replace placeholder labels with real fields. Keep the two-column split or stack on mobile.
+                  </p>
+                </div>
+
+                <div class="grid grid-2">
+                  <div class="stack">
+                    <div class="body-sm text-muted">Name</div>
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-full"></div>
+                      </div>
+                    </div>
+                    <div class="body-sm text-muted">Email</div>
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-full"></div>
+                      </div>
+                    </div>
+                    <div class="body-sm text-muted">Project type</div>
+                    <div class="placeholder-block">
+                      <div class="placeholder-inner">
+                        <div class="line line-mid"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="stack">
+                    <div class="body-sm text-muted">Short brief</div>
+                    <div class="placeholder-block" style="height: 100%;">
+                      <div class="placeholder-inner">
+                        <div class="line line-full"></div>
+                        <div class="line line-full"></div>
+                        <div class="line line-full"></div>
+                        <div class="line line-mid"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cluster-between">
+                  <span class="body-sm text-muted">No data is sent – purely visual.</span>
+                  <a href="#top" class="btn btn-ghost">
+                    <span>Back to top</span>
+                  </a>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>Static layout system – ready to split into multiple showcase pages.</div>
+        <nav class="footer-links">
+          <a href="#layouts">Layouts</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1278,12 +1278,12 @@
       border-radius: 1.5rem;
     }
 
-    /* CONTACT-kortin sisäinen grid:
-   vasen sarake = nimi + phone + email
-   oikea sarake = Need a website? */
     .contact-wide-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      /* 2 saraketta */
+      grid-template-rows: auto auto auto;
+      /* 3 riviä vasemmalle puolelle */
       gap: 1.5rem 2rem;
       align-items: flex-start;
     }
@@ -1294,10 +1294,22 @@
 
     .contact-main {
       grid-column: 1;
+      grid-row: 1;
+    }
+
+    .contact-phone {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .contact-email {
+      grid-column: 1;
+      grid-row: 3;
     }
 
     .contact-website {
       grid-column: 2;
+      grid-row: 1 / span 3;
       max-width: 280px;
     }
 
@@ -1305,10 +1317,15 @@
     @media (max-width: 720px) {
       .contact-wide-inner {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
       }
 
+      .contact-main,
+      .contact-phone,
+      .contact-email,
       .contact-website {
         grid-column: 1;
+        grid-row: auto;
       }
     }
 

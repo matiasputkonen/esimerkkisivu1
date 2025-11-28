@@ -3,29 +3,29 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Home</title>
+  <title>Matias Putkonen – Architecture-Driven Web Builds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Architecture-driven websites for serious businesses. From discovery to launch: layout systems, content and marketing in one coherent process." />
 
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-alt: #ffffff;
-      --bg-alt-2: #ffffff;
-      --card: #ffffff;
-      --card-soft: #ffffff;
-      --accent: #a04dee;
-      --accent-soft: rgba(194, 161, 255, 0.12);
-      --accent-2: #a04dee;
+      --bg: #020617;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #a855f7;
+      --accent-soft: rgba(168, 85, 247, 0.16);
+      --accent-2: #22c55e;
       --border: #1f2937;
       --border-soft: #111827;
-      --text: #a04dee;
-      --muted: #a04dee;
-      --muted-soft: #a04dee;
+      --text: #e5e7eb;
+      --muted: #a5b4fc;
+      --muted-soft: #9ca3af;
       --radius-xl: 1.5rem;
       --radius-lg: 1rem;
       --radius-md: 0.75rem;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.85);
-      --shadow-subtle: 0 12px 30px rgba(15, 23, 42, 0.7);
+      --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.9);
+      --shadow-subtle: 0 18px 45px rgba(15, 23, 42, 0.8);
       --gap-xl: 3.5rem;
       --gap-lg: 2.5rem;
       --gap-md: 1.5rem;
@@ -46,9 +46,8 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #ffffff 100, #ffffff 100%, #ffffff 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
       color: var(--text);
       line-height: 1.6;
       letter-spacing: 0.01em;
@@ -60,7 +59,7 @@
       flex-direction: column;
     }
 
-    /* Global layout primitives */
+    /* Layout primitives */
 
     .container {
       width: var(--container);
@@ -89,7 +88,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .cluster-between {
@@ -113,54 +112,32 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .grid-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .grid-auto-fit {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
     @media (max-width: 960px) {
 
       .grid-2,
-      .grid-3,
-      .grid-4 {
+      .grid-3 {
         grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-layout,
-      .two-column,
-      .split-layout {
-        grid-template-columns: minmax(0, 1fr) !important;
       }
     }
 
     /* Surfaces */
 
-    .surface {
-      background: radial-gradient(circle at top left, #ffffff 0, #ffffff 60%);
-    }
-
-    .surface-alt {
-      background: radial-gradient(circle at bottom right, #ffffff 0, #676767 55%, #7f7f7f 100%);
-    }
-
     .section {
       padding-block: 4.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.85);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
     }
 
     .section-soft {
       padding-block: 4.5rem;
-      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+      background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
     }
 
     .card {
-      background: radial-gradient(circle at top left, #111827 0, #020617 60%);
+      background: radial-gradient(circle at top left, #020617 0, #020617 60%);
       border-radius: var(--radius-xl);
       border: 1px solid var(--border);
-      padding: 1.75rem;
+      padding: 1.8rem;
       box-shadow: var(--shadow-subtle);
       position: relative;
       overflow: hidden;
@@ -168,17 +145,9 @@
 
     .card-outline {
       border-radius: var(--radius-xl);
-      border: 1px solid rgba(75, 85, 99, 0.4);
+      border: 1px solid rgba(75, 85, 99, 0.6);
       padding: 1.75rem;
-      background: radial-gradient(circle at top right, #020617 0, #020617 65%, #020617 100%);
-      position: relative;
-    }
-
-    .card-ghost {
-      border-radius: var(--radius-xl);
-      border: 1px dashed rgba(75, 85, 99, 0.4);
-      padding: 1.75rem;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.3));
+      background: radial-gradient(circle at top right, #020617 0, #020617 70%);
       position: relative;
     }
 
@@ -190,16 +159,16 @@
       border-radius: 999px;
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       border: 1px solid rgba(148, 163, 184, 0.7);
       color: var(--muted);
-      background: linear-gradient(90deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.85));
     }
 
     .pill-accent {
-      border-color: rgba(74, 222, 128, 0.6);
-      background: linear-gradient(90deg, rgba(22, 163, 74, 0.12), rgba(37, 99, 235, 0.06));
-      color: var(--accent);
+      border-color: rgba(34, 197, 94, 0.7);
+      background: radial-gradient(circle at top left, rgba(22, 163, 74, 0.2), rgba(15, 23, 42, 0.95));
+      color: #bbf7d0;
     }
 
     /* Typography */
@@ -213,12 +182,12 @@
     }
 
     h1 {
-      font-size: clamp(2.6rem, 5vw, 3.2rem);
-      line-height: 1.05;
+      font-size: clamp(2.6rem, 5vw, 3.3rem);
+      line-height: 1.03;
     }
 
     h2 {
-      font-size: clamp(1.75rem, 3vw, 2.1rem);
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
       line-height: 1.15;
     }
 
@@ -230,7 +199,7 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: var(--muted);
+      color: var(--muted-soft);
     }
 
     .body-lg {
@@ -243,16 +212,12 @@
       color: var(--muted-soft);
     }
 
-    .text-muted {
-      color: var(--muted);
+    .text-soft {
+      color: rgba(209, 213, 219, 0.9);
     }
 
     .text-accent {
       color: var(--accent);
-    }
-
-    .text-soft {
-      color: rgba(209, 213, 219, 0.9);
     }
 
     /* Header & nav */
@@ -260,9 +225,10 @@
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgb(218, 138, 255);
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: radial-gradient(circle at top, rgba(2, 6, 23, 0.96), rgba(2, 6, 23, 0.9));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
     }
 
     .nav-inner {
@@ -277,18 +243,15 @@
       display: inline-flex;
       align-items: center;
       gap: 0.7rem;
+      text-decoration: none;
+      color: var(--text);
     }
 
     .brand-logo {
       width: 32px;
       height: 32px;
       border-radius: 0.9rem;
-      background: conic-gradient(from 140deg,
-          #22c55e,
-          #22c55e,
-          #38bdf8,
-          #6366f1,
-          #22c55e);
+      background: conic-gradient(from 140deg, #22c55e, #22c55e, #38bdf8, #6366f1, #22c55e);
       position: relative;
       box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
     }
@@ -310,7 +273,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--muted-soft);
     }
 
     .brand-label span:last-child {
@@ -334,35 +297,70 @@
     }
 
     .nav-links a:hover {
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       color: var(--text);
       transform: translateY(-1px);
     }
 
     .nav-cta {
-      padding: 0.4rem 0.95rem;
+      padding: 0.45rem 1rem;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
-      font-size: 0.85rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, #22c55e, #16a34a 45%, #22c55e 80%);
+      font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      color: var(--text);
+      gap: 0.5rem;
+      color: #022c22;
       text-decoration: none;
-      transition: border 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
-    }
-
-    .nav-cta:hover {
-      border-color: rgba(74, 222, 128, 0.8);
-      box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.35);
-      transform: translateY(-1px);
+      font-weight: 600;
+      box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
     }
 
     @media (max-width: 720px) {
       .nav-links {
         display: none;
       }
+    }
+
+    /* Buttons */
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border 0.12s ease, background 0.12s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a 40%, #22c55e 80%);
+      box-shadow: 0 20px 40px rgba(34, 197, 94, 0.55);
+      color: #022c22;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 24px 52px rgba(34, 197, 94, 0.7);
+    }
+
+    .btn-ghost {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.97), rgba(15, 23, 42, 0.88));
+      border-color: rgba(75, 85, 99, 0.9);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(148, 163, 184, 0.9);
+      transform: translateY(-1px);
     }
 
     /* Hero */
@@ -373,7 +371,7 @@
 
     .hero-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr);
       gap: 3rem;
       align-items: center;
     }
@@ -381,13 +379,33 @@
     .hero-tagline {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.6rem;
     }
 
     .hero-title-row {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.9rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.86));
+      color: var(--muted);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #22c55e 50%, transparent 100%);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
     }
 
     .hero-cta-row {
@@ -400,74 +418,40 @@
     .hero-kpi-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.4rem;
+    }
+
+    .hero-usp {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.6rem;
       margin-top: 0.5rem;
     }
 
-    .chip {
-      display: inline-flex;
+    .usp-item {
+      display: flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.45rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.85));
-      color: var(--muted);
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--muted-soft);
     }
 
-    .chip-dot {
+    .usp-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: radial-gradient(circle, #22c55e 0, #22c55e 50%, transparent 100%);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+      background: linear-gradient(135deg, #a855f7, #22c55e);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.4rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, border 0.12s ease, background 0.12s ease;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at top left, #22c55e, #16a34a 40%, #22c55e 80%);
-      box-shadow: 0 18px 35px rgba(34, 197, 94, 0.45);
-      color: #022c22;
-      font-weight: 600;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 22px 45px rgba(34, 197, 94, 0.55);
-    }
-
-    .btn-ghost {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.86));
-      border-color: rgba(75, 85, 99, 0.8);
-      color: var(--muted);
-    }
-
-    .btn-ghost:hover {
-      border-color: rgba(148, 163, 184, 0.9);
-      transform: translateY(-1px);
-    }
+    /* Hero visual – simplified stats card */
 
     .hero-matrix {
       position: relative;
       border-radius: 1.8rem;
-      padding: 1.75rem;
-      background: radial-gradient(circle at top left, #22c55e0d, #0b1120 60%, #020617 100%);
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 1.8rem;
+      background: radial-gradient(circle at top left, #22c55e0e, #020617 65%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       box-shadow: var(--shadow-soft);
       overflow: hidden;
     }
@@ -477,8 +461,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top left, rgba(74, 222, 128, 0.11), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.09), transparent 55%);
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.18), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.1), transparent 55%);
       mix-blend-mode: screen;
       opacity: 0.9;
     }
@@ -486,40 +470,40 @@
     .hero-matrix-inner {
       position: relative;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 1.5rem;
+      grid-template-rows: auto auto 1fr;
+      gap: 1.2rem;
     }
 
-    .matrix-block {
-      display: grid;
-      grid-template-rows: auto auto;
-      gap: 1.15rem;
+    .matrix-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--muted-soft);
     }
 
     .matrix-row {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.75rem;
+      gap: 0.8rem;
     }
 
     .matrix-card {
       border-radius: 1.1rem;
       padding: 0.85rem 0.9rem;
-      background: linear-gradient(145deg,
-          rgba(15, 23, 42, 0.95),
-          rgba(15, 23, 42, 0.7));
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.84));
+      border: 1px solid rgba(31, 41, 55, 0.95);
       display: flex;
       flex-direction: column;
       gap: 0.35rem;
+      font-size: 0.8rem;
     }
 
     .matrix-label {
-      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--muted);
+      color: var(--muted-soft);
+      font-size: 0.7rem;
     }
 
     .matrix-value {
@@ -528,46 +512,7 @@
     }
 
     .matrix-value-soft {
-      font-size: 0.8rem;
-      color: var(--muted-soft);
-    }
-
-    .matrix-chart {
-      border-radius: 1.3rem;
-      padding: 1.1rem 1.1rem 1rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top left, rgba(17, 24, 39, 0.95), rgba(15, 23, 42, 0.9));
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 0.8rem;
-    }
-
-    .chart-bars {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      align-items: flex-end;
-      gap: 0.25rem;
-      height: 120px;
-    }
-
-    .chart-bar {
-      border-radius: 999px;
-      background: linear-gradient(180deg, #22c55e, #22c55eaa);
-    }
-
-    .chart-bar-alt {
-      background: linear-gradient(180deg, #38bdf8, #38bdf8aa);
-    }
-
-    .chart-bar-muted {
-      background: linear-gradient(180deg, #374151, #111827);
-    }
-
-    .chart-axis {
-      margin-top: 0.6rem;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       color: var(--muted-soft);
     }
 
@@ -575,13 +520,9 @@
       .hero-inner {
         grid-template-columns: minmax(0, 1fr);
       }
-
-      .hero-matrix-inner {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
 
-    /* Section headers */
+    /* Section header */
 
     .section-header {
       display: flex;
@@ -615,25 +556,25 @@
       }
     }
 
-    /* Layout gallery */
+    /* Layout gallery – same structure, tekstit päivitetty */
 
     .layout-gallery {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
-      gap: 1.5rem;
+      gap: 1.6rem;
     }
 
-    .layout-split {
-      display: grid;
-      grid-template-rows: minmax(0, 1.2fr) minmax(0, 0.9fr);
-      gap: 1rem;
+    @media (max-width: 960px) {
+      .layout-gallery {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .layout-preview {
-      border-radius: 1.4rem;
+      border-radius: 1.5rem;
       padding: 1.4rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top left, #0f172a, #020617 70%);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 1rem;
@@ -641,8 +582,8 @@
 
     .layout-status-bar {
       border-radius: 999px;
-      padding: 0.4rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 0.4rem 0.7rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -667,82 +608,12 @@
       box-shadow: 0 0 9px rgba(56, 189, 248, 0.7);
     }
 
-    .status-dot.amber {
-      background: #fbbf24;
-      box-shadow: 0 0 9px rgba(251, 191, 36, 0.7);
-    }
-
-    .browser-chrome {
-      border-radius: 1rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top left, #020617, #020617 70%);
-      padding: 0.9rem;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 0.75rem;
-    }
-
-    .browser-tabs {
-      display: flex;
-      align-items: flex-end;
-      gap: 0.5rem;
-      font-size: 0.72rem;
-      color: var(--muted-soft);
-    }
-
-    .browser-tab {
-      padding: 0.35rem 0.6rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-    }
-
-    .browser-tab.active {
-      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), rgba(15, 23, 42, 0.96));
-      border-color: rgba(74, 222, 128, 0.7);
-      color: var(--text);
-    }
-
-    .browser-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 0.75rem;
-      height: 100%;
-    }
-
-    .browser-col {
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 0.6rem;
-    }
-
     .placeholder-block {
-      border-radius: 0.9rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.8));
+      border-radius: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.85));
       position: relative;
       overflow: hidden;
-    }
-
-    .placeholder-block::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(120deg,
-          transparent 0,
-          transparent 35%,
-          rgba(55, 65, 81, 0.55) 50%,
-          transparent 65%,
-          transparent 100%);
-      transform: translateX(-100%);
-      animation: shimmer 3.5s infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes shimmer {
-      to {
-        transform: translateX(100%);
-      }
     }
 
     .placeholder-inner {
@@ -755,7 +626,7 @@
     .line {
       height: 6px;
       border-radius: 999px;
-      background: linear-gradient(90deg, #1f2937, #020617);
+      background: linear-gradient(90deg, #111827, #020617);
     }
 
     .line-short {
@@ -770,33 +641,7 @@
       width: 100%;
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.2rem;
-    }
-
-    .mini-pill {
-      padding: 0.22rem 0.55rem;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      font-size: 0.7rem;
-      color: var(--muted-soft);
-      background: radial-gradient(circle at top left, #020617, #020617);
-    }
-
-    @media (max-width: 960px) {
-      .layout-gallery {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .browser-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* Portfolio grid */
+    /* Portfolio grid – nyt “Examples of where this works” */
 
     .portfolio-grid {
       display: grid;
@@ -818,9 +663,9 @@
 
     .portfolio-card {
       border-radius: 1.4rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top left, rgba(17, 24, 39, 1), rgba(15, 23, 42, 1));
-      padding: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #020617, #020617 80%);
+      padding: 1.1rem;
       display: grid;
       grid-template-rows: auto 1fr auto;
       gap: 0.9rem;
@@ -828,73 +673,17 @@
       overflow: hidden;
     }
 
-    .portfolio-thumb {
-      border-radius: 1rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: radial-gradient(circle at top left, #020617, #020617 70%);
-      padding: 0.7rem;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      gap: 0.5rem;
-    }
-
-    .thumb-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.6rem;
-      font-size: 0.7rem;
-      color: var(--muted-soft);
-    }
-
-    .thumb-body {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 0.4rem;
-    }
-
-    .thumb-block-main,
-    .thumb-block-side {
-      border-radius: 0.8rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thumb-block-main::before,
-    .thumb-block-side::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(45deg,
-          rgba(37, 99, 235, 0.2),
-          transparent 40%,
-          transparent 60%,
-          rgba(34, 197, 94, 0.18));
-      mix-blend-mode: screen;
-      opacity: 0.7;
-    }
-
-    .thumb-lines {
-      position: relative;
-      padding: 0.7rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
     .tag-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
+      gap: 0.4rem;
     }
 
     .tag {
       padding: 0.22rem 0.6rem;
       border-radius: 999px;
       font-size: 0.68rem;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
       border: 1px solid rgba(55, 65, 81, 0.9);
       color: var(--muted-soft);
     }
@@ -921,12 +710,12 @@
     }
 
     .link-pill:hover {
-      border-color: rgba(74, 222, 128, 0.8);
+      border-color: rgba(74, 222, 128, 0.9);
       color: var(--text);
       transform: translateY(-1px);
     }
 
-    /* Timeline layout */
+    /* Timeline – sinun prosessi */
 
     .timeline {
       position: relative;
@@ -953,7 +742,7 @@
       bottom: 0;
       width: 2px;
       background: linear-gradient(to bottom, #22c55e, #38bdf8);
-      opacity: 0.65;
+      opacity: 0.7;
     }
 
     .timeline-marker {
@@ -969,9 +758,9 @@
       width: 20px;
       height: 20px;
       border-radius: 999px;
-      border: 2px solid rgba(163, 230, 53, 0.9);
+      border: 2px solid rgba(168, 85, 247, 0.9);
       background: radial-gradient(circle, #22c55e, transparent 65%);
-      box-shadow: 0 0 13px rgba(34, 197, 94, 0.7);
+      box-shadow: 0 0 13px rgba(168, 85, 247, 0.8);
     }
 
     .timeline-label {
@@ -988,11 +777,11 @@
 
     .timeline-card {
       border-radius: 1.3rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      padding: 1.25rem;
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 1.3rem;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.97));
       display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
+      grid-template-columns: 0.9fr 1.1fr;
       gap: 1.2rem;
     }
 
@@ -1009,21 +798,30 @@
       margin-top: 0.4rem;
     }
 
-    .level-pill {
-      padding: 0.24rem 0.7rem;
+    .mini-pill {
+      padding: 0.2rem 0.6rem;
       border-radius: 999px;
-      border: 1px solid rgba(74, 222, 128, 0.7);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      font-size: 0.7rem;
+      color: var(--muted-soft);
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .level-pill {
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(74, 222, 128, 0.8);
       font-size: 0.72rem;
-      color: var(--accent);
+      color: #bbf7d0;
       background: rgba(22, 163, 74, 0.08);
     }
 
-    /* Dashboard style layout */
+    /* Dashboard section – unchanged structurally, tekstit päivitetty kevyesti */
 
     .dashboard-grid {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 1.5rem;
+      gap: 1.6rem;
     }
 
     @media (max-width: 1024px) {
@@ -1034,7 +832,7 @@
 
     .sidebar-nav {
       border-radius: 1.5rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       background: radial-gradient(circle at top left, #020617, #020617 70%);
       padding: 1.1rem;
       display: grid;
@@ -1044,7 +842,7 @@
 
     .sidebar-section {
       border-radius: 1rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       padding: 0.8rem;
       background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
     }
@@ -1066,14 +864,14 @@
     }
 
     .sidebar-link.active {
-      border-color: rgba(74, 222, 128, 0.75);
-      background: radial-gradient(circle at left, rgba(34, 197, 94, 0.16), rgba(15, 23, 42, 0.95));
+      border-color: rgba(74, 222, 128, 0.8);
+      background: radial-gradient(circle at left, rgba(34, 197, 94, 0.16), rgba(15, 23, 42, 0.98));
       color: var(--text);
     }
 
     .main-panel {
       border-radius: 1.7rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       padding: 1.3rem;
       background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.98));
       display: grid;
@@ -1101,13 +899,44 @@
       border: 1px solid rgba(55, 65, 81, 0.9);
       font-size: 0.78rem;
       color: var(--muted-soft);
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.97);
     }
 
     .filter-pill.active {
-      border-color: rgba(59, 130, 246, 0.8);
-      color: var(--accent-2);
-      background: rgba(37, 99, 235, 0.12);
+      border-color: rgba(59, 130, 246, 0.9);
+      color: var(--accent);
+      background: rgba(37, 99, 235, 0.2);
+    }
+
+    .browser-chrome {
+      border-radius: 1rem;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      padding: 0.9rem;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0.75rem;
+    }
+
+    .browser-tabs {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: var(--muted-soft);
+    }
+
+    .browser-tab {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+    }
+
+    .browser-tab.active {
+      background: radial-gradient(circle at top left, rgba(34, 197, 94, 0.2), rgba(15, 23, 42, 0.98));
+      border-color: rgba(74, 222, 128, 0.9);
+      color: var(--text);
     }
 
     .board-grid {
@@ -1131,8 +960,8 @@
 
     .board-column {
       border-radius: 1.1rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.94));
       padding: 0.85rem;
       display: grid;
       grid-template-rows: auto 1fr;
@@ -1154,9 +983,9 @@
 
     .ticket-card {
       border-radius: 0.9rem;
-      border: 1px solid rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(31, 41, 55, 0.95);
       padding: 0.7rem;
-      background: radial-gradient(circle at top left, #020617, #020617 70%);
+      background: radial-gradient(circle at top left, #020617, #020617 75%);
       display: grid;
       gap: 0.3rem;
     }
@@ -1176,12 +1005,11 @@
       color: var(--muted-soft);
     }
 
-    /* CTA section */
+    /* CTA & Contact */
 
     .cta-section-full {
       padding-block: 4rem;
       background: #020617;
-      /* sama tausta kuin muissa dark-sektioissa */
     }
 
     .cta-band {
@@ -1189,13 +1017,9 @@
       margin: 0;
       border-radius: 1.8rem;
       border: 1px solid rgba(55, 65, 81, 0.95);
-      background: radial-gradient(circle at top left,
-          #020617 0,
-          #020617 70%);
-      /* tumma, ei vihreä matto */
-      padding: 1.8rem 1.5rem;
+      background: radial-gradient(circle at top left, #020617 0, #020617 70%);
+      padding: 1.8rem 1.6rem;
       display: block;
-      /* EI grid – varsinainen grid on cta-band-innerissä */
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
@@ -1206,16 +1030,12 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at top left,
-          rgba(34, 197, 94, 0.18), transparent 60%),
-        radial-gradient(circle at bottom right,
-          rgba(56, 189, 248, 0.14), transparent 55%);
+        radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.14), transparent 55%);
       mix-blend-mode: screen;
       opacity: 0.7;
-      /* kevyt korostus, ei iso vihreä blokki */
     }
 
-    /* Vasen = CTA, oikea = CONTACT */
     .cta-band-inner {
       position: relative;
       display: grid;
@@ -1224,7 +1044,6 @@
       align-items: flex-start;
     }
 
-    /* Mobiilissa allekkain */
     @media (max-width: 960px) {
       .cta-band-inner {
         grid-template-columns: minmax(0, 1fr);
@@ -1234,7 +1053,7 @@
     .cta-copy {
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.8rem;
     }
 
     .cta-matrix {
@@ -1281,16 +1100,12 @@
     .contact-wide-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      /* 2 saraketta */
       grid-template-rows: auto auto auto;
-      /* 3 riviä vasemmalle puolelle */
       gap: 1.5rem 2rem;
       align-items: flex-start;
     }
 
-    .contact-block {
-      /* tarvittaessa lisäspacingiä tänne */
-    }
+    .contact-block {}
 
     .contact-main {
       grid-column: 1;
@@ -1310,15 +1125,32 @@
     .contact-website {
       grid-column: 2;
       grid-row: 1 / span 3;
-      max-width: 280px;
+      max-width: 320px;
     }
 
-    .contact-website p+p {
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 0.75rem;
+      row-gap: 0.35rem;
       margin-top: 0.6rem;
-      /* pieni lisäväli tekstiblokkien väliin */
     }
 
-    /* Mobiilissa kaikki allekkain */
+    .pricing-label {
+      white-space: nowrap;
+    }
+
+    .pricing-text {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .pricing-amount {
+      font-weight: 600;
+      color: var(--text);
+    }
+
     @media (max-width: 720px) {
       .contact-wide-inner {
         grid-template-columns: 1fr;
@@ -1334,12 +1166,19 @@
       }
     }
 
+    .contact-wide-inner p {
+      margin-bottom: 0.4rem;
+    }
+
+    .contact-wide-inner p:last-child {
+      margin-bottom: 0;
+    }
+
     /* Footer */
 
     .site-footer {
       padding: 2.5rem 1.5rem 3rem;
       background: #020617;
-      /* sama kuin muu tausta */
     }
 
     .footer-band {
@@ -1348,7 +1187,7 @@
       border-radius: 1.8rem;
       border: 1px solid rgba(55, 65, 81, 0.95);
       background: radial-gradient(circle at bottom left,
-          rgba(160, 77, 238, 0.18),
+          rgba(160, 77, 238, 0.2),
           rgba(15, 23, 42, 0.98));
       padding: 1.6rem 1.8rem 1.4rem;
       box-shadow: var(--shadow-soft);
@@ -1356,22 +1195,8 @@
       overflow: hidden;
     }
 
-    .footer-band::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left,
-          rgba(160, 77, 238, 0.22), transparent 60%),
-        radial-gradient(circle at bottom right,
-          rgba(56, 189, 248, 0.12), transparent 55%);
-      mix-blend-mode: screen;
-      opacity: 0.85;
-    }
-
     .footer-inner {
       position: relative;
-      /* jotta glow jää taustalle */
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1.5rem 2rem;
@@ -1401,7 +1226,7 @@
       font-size: 0.75rem;
     }
 
-    /* Utility */
+    /* Utils */
 
     .mt-sm {
       margin-top: 0.5rem;
@@ -1418,12 +1243,6 @@
     .mt-xl {
       margin-top: 2rem;
     }
-
-    .sep {
-      height: 1px;
-      background: radial-gradient(circle at center, rgba(55, 65, 81, 0.9), transparent);
-      margin-block: 1rem;
-    }
   </style>
 </head>
 
@@ -1436,17 +1255,17 @@
           <div class="brand-logo" aria-hidden="true"></div>
           <div class="brand-label">
             <span>Matias Putkonen</span>
-            <span>Example page</span>
+            <span>Architecture-driven web builds</span>
           </div>
         </a>
 
         <nav class="nav-links" aria-label="Päänavigaatio">
-          <a href="#layouts">Layouts</a>
-          <a href="#portfolio">Portfolio grid</a>
-          <a href="#timeline">Delivery flow</a>
-          <a href="#dashboard">Dashboard UI</a>
+          <a href="#layouts">Layout system</a>
+          <a href="#portfolio">Use cases</a>
+          <a href="#timeline">Process</a>
+          <a href="#dashboard">Deliverables</a>
           <a href="#contact" class="nav-cta">
-            <span>REQUEST OFFER!</span>
+            <span>REQUEST OFFER</span>
             <span>↗</span>
           </a>
         </nav>
@@ -1454,173 +1273,154 @@
     </header>
 
     <main id="top">
-      <!-- Hero -->
+      <!-- HERO -->
       <section class="hero">
         <div class="container hero-inner">
           <div class="hero-tagline">
             <div class="chip">
+              <span class="chip-dot"></span>
+              <span>End-to-end web architecture</span>
             </div>
 
             <div class="hero-title-row">
               <h1>Architecture-driven websites that scale with your business.</h1>
               <p class="body-lg">
-                I design web experiences using the same structural principles found in
-                high-performance software systems: clear information flow,
-                reusable layout matrices, and stress-tested patterns that grow with your needs.
+                I build websites with the same structural thinking used in high-performance software systems:
+                clear information flow, reusable layout matrices, and marketing-ready content that is easy to extend.
               </p>
+            </div>
 
-              <div class="hero-usp">
-                <div class="usp-item">
-                  <span class="usp-dot"></span>
-                  <span>Layout systems engineered, not improvised</span>
-                </div>
-                <div class="usp-item">
-                  <span class="usp-dot"></span>
-                  <span>Conversion-architecture first</span>
-                </div>
-                <div class="usp-item">
-                  <span class="usp-dot"></span>
-                  <span>Technical risk mitigation</span>
-                </div>
-                <div class="usp-item">
-                  <span class="usp-dot"></span>
-                  <span>Zero-dependency static builds</span>
-                </div>
+            <div class="hero-usp">
+              <div class="usp-item">
+                <span class="usp-dot"></span>
+                <span>Layout systems engineered, not improvised.</span>
               </div>
-
-              <div class="hero-cta-row">
-                <a href="#contact" class="btn btn-primary">Request architecture demo</a>
-                <a href="#layouts" class="btn btn-ghost">View layout system</a>
+              <div class="usp-item">
+                <span class="usp-dot"></span>
+                <span>Conversion-architecture before visuals – every page has a job.</span>
               </div>
-
-              <div class="hero-kpi-row">
-                <div>
-                  <div class="eyebrow">Pattern library</div>
-                  <div class="text-soft">Hero + marketing + dashboard + timeline in one static HTML asset.</div>
-                </div>
-                <div>
-                  <div class="eyebrow">Focus</div>
-                  <div class="text-soft">Responsive grid and flex alignment, minimal placeholder text.</div>
-                </div>
+              <div class="usp-item">
+                <span class="usp-dot"></span>
+                <span>Adobe-certified design, content and marketing workflow in one package.</span>
+              </div>
+              <div class="usp-item">
+                <span class="usp-dot"></span>
+                <span>Pure HTML/CSS – no bloat, no framework lock-in, easy to host anywhere.</span>
               </div>
             </div>
 
-            <aside class="hero-matrix" aria-label="Layout summary">
-              <div class="hero-matrix-inner">
-                <div class="matrix-block">
-                  <div class="matrix-row">
-                    <div class="matrix-card">
-                      <div class="matrix-label">Page systems</div>
-                      <div class="matrix-value">Landing / App / Dashboard</div>
-                      <div class="matrix-value-soft">Single HTML, multiple layout archetypes.</div>
-                    </div>
-                    <div class="matrix-card">
-                      <div class="matrix-label">Grids</div>
-                      <div class="matrix-value">Auto-fit, 2–4 cols</div>
-                      <div class="matrix-value-soft">Cards, split layouts, timeline, kanban.</div>
-                    </div>
-                    <div class="matrix-card">
-                      <div class="matrix-label">Density</div>
-                      <div class="matrix-value">Low copy</div>
-                      <div class="matrix-value-soft">Structure over content.</div>
-                    </div>
-                  </div>
+            <div class="hero-cta-row mt-sm">
+              <a href="#contact" class="btn btn-primary">
+                <span>Request architecture demo</span>
+                <span>↗</span>
+              </a>
+              <a href="#timeline" class="btn btn-ghost">
+                <span>View my delivery process</span>
+              </a>
+            </div>
 
-                  <div class="matrix-row">
-                    <div class="matrix-card">
-                      <div class="matrix-label">Viewports</div>
-                      <div class="matrix-value">≥ 360px</div>
-                      <div class="matrix-value-soft">Breakpoints at 720 / 960 / 1024.</div>
-                    </div>
-                    <div class="matrix-card">
-                      <div class="matrix-label">Surface style</div>
-                      <div class="matrix-value">Dark / Neon</div>
-                      <div class="matrix-value-soft">Portfolio-ready visual identity.</div>
-                    </div>
-                    <div class="matrix-card">
-                      <div class="matrix-label">Usage</div>
-                      <div class="matrix-value">Static showcase</div>
-                      <div class="matrix-value-soft">Split into pages or keep one.</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="matrix-chart">
-                  <div class="cluster-between">
-                    <div class="body-sm text-muted">Layout complexity heatmap</div>
-                    <div class="body-sm text-accent">Hero / Portfolio / Timeline / Dashboard</div>
-                  </div>
-                  <div class="chart-bars" aria-hidden="true">
-                    <div class="chart-bar" style="height: 92%;"></div>
-                    <div class="chart-bar" style="height: 88%;"></div>
-                    <div class="chart-bar-alt" style="height: 70%;"></div>
-                    <div class="chart-bar" style="height: 85%;"></div>
-                    <div class="chart-bar-muted" style="height: 45%;"></div>
-                    <div class="chart-bar-alt" style="height: 78%;"></div>
-                    <div class="chart-bar" style="height: 95%;"></div>
-                    <div class="chart-bar-muted" style="height: 40%;"></div>
-                    <div class="chart-bar-alt" style="height: 72%;"></div>
-                    <div class="chart-bar" style="height: 83%;"></div>
-                    <div class="chart-bar-muted" style="height: 38%;"></div>
-                    <div class="chart-bar" style="height: 90%;"></div>
-                  </div>
-                  <div class="chart-axis">
-                    <span>Landing</span>
-                    <span>Portfolio</span>
-                    <span>Dashboard</span>
-                    <span>System</span>
-                  </div>
+            <div class="hero-kpi-row mt-md">
+              <div>
+                <div class="eyebrow">For who</div>
+                <div class="body-sm text-soft">
+                  SMEs, consultants and technical teams who need a serious web presence without internal dev overhead.
                 </div>
               </div>
-            </aside>
+              <div>
+                <div class="eyebrow">How I work</div>
+                <div class="body-sm text-soft">
+                  Fixed-scope architecture, fast static implementation, optional continuous optimisation.
+                </div>
+              </div>
+            </div>
           </div>
+
+          <aside class="hero-matrix" aria-label="Capability summary">
+            <div class="hero-matrix-inner">
+              <div class="cluster-between">
+                <div class="body-sm text-soft">Full-stack creative stack</div>
+                <span class="pill-accent">Adobe Graphic Designer · Content Creator · Marketing Specialist</span>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-card">
+                  <div class="matrix-label">Architecture</div>
+                  <div class="matrix-value">Page & layout systems</div>
+                  <div class="matrix-value-soft">Hero, story, service, timeline, dashboard, CTA.</div>
+                </div>
+                <div class="matrix-card">
+                  <div class="matrix-label">Content</div>
+                  <div class="matrix-value">Offer-driven copy</div>
+                  <div class="matrix-value-soft">Structure first: message, proof, action.</div>
+                </div>
+                <div class="matrix-card">
+                  <div class="matrix-label">Marketing</div>
+                  <div class="matrix-value">Campaign-ready</div>
+                  <div class="matrix-value-soft">Landing pages aligned with paid and organic traffic.</div>
+                </div>
+              </div>
+
+              <div class="matrix-row">
+                <div class="matrix-card">
+                  <div class="matrix-label">Stack</div>
+                  <div class="matrix-value">Static HTML + CSS</div>
+                  <div class="matrix-value-soft">Easy to deploy to Vercel, Netlify or plain hosting.</div>
+                </div>
+                <div class="matrix-card">
+                  <div class="matrix-label">Focus</div>
+                  <div class="matrix-value">Layout clarity</div>
+                  <div class="matrix-value-soft">Minimal copy, maximal structure.</div>
+                </div>
+                <div class="matrix-card">
+                  <div class="matrix-label">Engagement</div>
+                  <div class="matrix-value">Strategy → launch</div>
+                  <div class="matrix-value-soft">You get a clear process, not random screens.</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
       </section>
 
-      <!-- Layout gallery -->
+      <!-- LAYOUT SYSTEM -->
       <section id="layouts" class="section-soft">
         <div class="container stack-xl">
           <header class="section-header">
             <div class="section-title-block">
-              <span class="eyebrow">Layout gallery</span>
-              <h2>Hero, split, and marketing grids in one combined frame.</h2>
+              <span class="eyebrow">Layout system</span>
+              <h2>Reusable page archetypes instead of one-off designs.</h2>
               <p class="body-lg">
-                Use each block as a base pattern. Duplicate rows and columns to scale to any required line count.
+                The same core layout system can power your hero page, service pages, case studies and dashboard-like
+                admin views.
+                Below is the static layout library I use as a starting point in projects.
               </p>
             </div>
             <div class="section-meta">
-              <span class="pill">Static HTML + embedded CSS</span>
-              <span class="pill pill-accent">No JS, layout-first design</span>
+              <span class="pill">Grid-based structure</span>
+              <span class="pill pill-accent">Static HTML + embedded CSS</span>
             </div>
           </header>
 
           <div class="layout-gallery">
-            <div class="layout-split">
+            <div class="stack-lg">
               <div class="layout-preview">
                 <div class="layout-status-bar">
                   <div class="cluster">
                     <div class="status-dot green"></div>
-                    <span>Landing-grid</span>
+                    <span>Acquisition layout</span>
                   </div>
-                  <div class="cluster">
-                    <span>Hero / Feature / CTA</span>
-                  </div>
+                  <span>Hero · Offer · CTA</span>
                 </div>
-
-                <div class="grid two-column"
-                  style="margin-top: 1rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem;">
+                <div class="grid" style="margin-top:1rem;grid-template-columns:1.4fr 1fr;gap:1rem;">
                   <div class="placeholder-block">
                     <div class="placeholder-inner">
                       <div class="line line-mid"></div>
                       <div class="line line-full"></div>
                       <div class="line line-short"></div>
-                      <div class="pill-row">
-                        <span class="mini-pill">Primary CTA</span>
-                        <span class="mini-pill">Secondary</span>
-                        <span class="mini-pill">Ghost button</span>
-                      </div>
+                      <div class="line line-mid"></div>
                     </div>
                   </div>
-                  <div class="grid" style="gap: 0.7rem;">
+                  <div class="grid" style="gap:0.7rem;">
                     <div class="placeholder-block">
                       <div class="placeholder-inner">
                         <div class="line line-short"></div>
@@ -1629,7 +1429,7 @@
                     </div>
                     <div class="placeholder-block">
                       <div class="placeholder-inner">
-                        <div class="line line-short"></div>
+                        <div class="line line-mid"></div>
                         <div class="line line-full"></div>
                       </div>
                     </div>
@@ -1641,14 +1441,11 @@
                 <div class="layout-status-bar">
                   <div class="cluster">
                     <div class="status-dot blue"></div>
-                    <span>Split-content</span>
+                    <span>Story layout</span>
                   </div>
-                  <div class="cluster">
-                    <span>Case layout</span>
-                  </div>
+                  <span>Case study / About</span>
                 </div>
-
-                <div class="grid" style="margin-top: 1rem; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="grid" style="margin-top:1rem;grid-template-columns:1fr 1fr;gap:1rem;">
                   <div class="placeholder-block">
                     <div class="placeholder-inner">
                       <div class="line line-full"></div>
@@ -1657,18 +1454,11 @@
                       <div class="line line-short"></div>
                     </div>
                   </div>
-                  <div class="grid" style="grid-template-rows: auto auto; gap: 0.7rem;">
-                    <div class="placeholder-block">
-                      <div class="placeholder-inner">
-                        <div class="line line-mid"></div>
-                        <div class="line line-short"></div>
-                      </div>
-                    </div>
-                    <div class="placeholder-block">
-                      <div class="placeholder-inner">
-                        <div class="line line-full"></div>
-                        <div class="line line-mid"></div>
-                      </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-mid"></div>
+                      <div class="line line-short"></div>
+                      <div class="line line-mid"></div>
                     </div>
                   </div>
                 </div>
@@ -1677,35 +1467,33 @@
 
             <aside class="card-outline stack-lg">
               <div class="stack">
-                <span class="eyebrow">Pattern usage</span>
-                <h3>Turn blocks into standalone pages.</h3>
+                <span class="eyebrow">How this helps you</span>
+                <h3>From “one nice page” to a maintainable system.</h3>
                 <p class="body-sm">
-                  Each pattern is a complete, self-contained layout fragment. Copy, paste, and extend to build
-                  standalone hero pages, marketing pages, or app shells.
+                  Instead of designing each page from scratch, I define a small set of page archetypes and
+                  a consistent grid.
+                  This reduces noise, speeds up implementation and keeps things consistent when your site grows.
                 </p>
               </div>
 
-              <div class="grid grid-auto-fit">
-                <div class="card-ghost">
+              <div class="grid grid-3">
+                <div class="card">
                   <div class="body-sm text-soft">
-                    Hero + feature section. Use as top-level layout for SaaS or consulting pages.
+                    Hero + offer layout tailored for conversion – ideal for campaigns and homepages.
                   </div>
-                  <div class="sep"></div>
-                  <div class="body-sm text-muted">Archetype: <strong>Landing</strong></div>
+                  <div class="mt-sm body-sm text-accent">Use: lead generation & launches.</div>
                 </div>
-                <div class="card-ghost">
+                <div class="card">
                   <div class="body-sm text-soft">
-                    Split-content layout. Perfect for case studies or product detail views.
+                    Story and case layouts that support longer narratives without losing structure.
                   </div>
-                  <div class="sep"></div>
-                  <div class="body-sm text-muted">Archetype: <strong>Case / Story</strong></div>
+                  <div class="mt-sm body-sm text-accent">Use: case studies, “About” pages.</div>
                 </div>
-                <div class="card-ghost">
+                <div class="card">
                   <div class="body-sm text-soft">
-                    Shimmer placeholders highlight grid structure instead of words.
+                    App-like layouts for dashboards and internal tools, so the ecosystem feels coherent.
                   </div>
-                  <div class="sep"></div>
-                  <div class="body-sm text-muted">Focus: <strong>Layout</strong></div>
+                  <div class="mt-sm body-sm text-accent">Use: portals & internal views.</div>
                 </div>
               </div>
             </aside>
@@ -1713,292 +1501,99 @@
         </div>
       </section>
 
-      <!-- Portfolio cards -->
+      <!-- USE CASES / PORTFOLIO -->
       <section id="portfolio" class="section">
         <div class="container stack-xl">
           <header class="section-header">
             <div class="section-title-block">
-              <span class="eyebrow">Portfolio grid</span>
-              <h2>Project tiles with nested layout previews.</h2>
+              <span class="eyebrow">Use cases</span>
+              <h2>Where an architecture-first site makes a real difference.</h2>
               <p class="body-lg">
-                Each tile is a miniature page: browser chrome, grid, cards, and tags. Duplicate rows to scale line count
-                and visual density.
+                Below are example use cases that benefit from a structured, low-copy layout and clear call-to-action.
               </p>
             </div>
             <div class="section-meta">
-              <span class="pill">Grid 3 → 2 → 1</span>
-              <span class="pill">Nested compositions</span>
+              <span class="pill">SMEs & expert services</span>
+              <span class="pill">Technical products</span>
             </div>
           </header>
 
           <div class="portfolio-grid">
-            <!-- Tile 1 -->
             <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Marketing layout</span>
-                  <span>Landing</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-full"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="stack">
-                <h3>Landing system</h3>
+                <h3>Consulting & expert services</h3>
+                <p class="body-sm text-soft">
+                  Clear explanation of your offer, proof and next step – without drowning the visitor in text.
+                </p>
                 <div class="tag-row">
-                  <span class="tag">Hero</span>
-                  <span class="tag">Feature grid</span>
-                  <span class="tag">CTA band</span>
+                  <span class="tag">Offer-first hero</span>
+                  <span class="tag">Case highlights</span>
+                  <span class="tag">Strong CTA</span>
                 </div>
               </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Use as default marketing page structure.</span>
-                <a href="#layouts" class="link-pill">
-                  <span>View pattern</span>
-                  <span>→</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Tile 2 -->
-            <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Dashboard layout</span>
-                  <span>Web app</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                      <div class="line line-mid"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="stack">
-                <h3>App shell</h3>
-                <div class="tag-row">
-                  <span class="tag">Sidebar</span>
-                  <span class="tag">Top bar</span>
-                  <span class="tag">Kanban</span>
-                </div>
-              </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Static HTML, dashboard-like structure.</span>
-                <a href="#dashboard" class="link-pill">
-                  <span>Open dashboard</span>
-                  <span>→</span>
-                </a>
-              </div>
-            </article>
-
-            <!-- Tile 3 -->
-            <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Timeline layout</span>
-                  <span>Process</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-full"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="stack">
-                <h3>Delivery timeline</h3>
-                <div class="tag-row">
-                  <span class="tag">Rail</span>
-                  <span class="tag">Markers</span>
-                  <span class="tag">Cards</span>
-                </div>
-              </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Explain delivery flow visually.</span>
+              <div class="card-footer-row mt-md">
+                <span class="body-sm text-muted">Ideal if you sell your time or expertise.</span>
                 <a href="#timeline" class="link-pill">
-                  <span>See timeline</span>
+                  <span>See delivery model</span>
                   <span>→</span>
                 </a>
               </div>
             </article>
 
-            <!-- Tile 4 -->
             <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Case layout</span>
-                  <span>Story</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="stack">
-                <h3>Case detail</h3>
+                <h3>Manufacturing & industrial SMEs</h3>
+                <p class="body-sm text-soft">
+                  Technical products explained in a way that combines specs, applications and contact flow without
+                  feeling heavy.
+                </p>
                 <div class="tag-row">
-                  <span class="tag">Split</span>
-                  <span class="tag">Headline block</span>
-                  <span class="tag">Aside</span>
+                  <span class="tag">Technical layout</span>
+                  <span class="tag">Application blocks</span>
+                  <span class="tag">Quote CTA</span>
                 </div>
               </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Good for one-page story layouts.</span>
-                <a href="#layouts" class="link-pill">
-                  <span>Reuse pattern</span>
-                  <span>→</span>
-                </a>
+              <div class="card-footer-row mt-md">
+                <span class="body-sm text-muted">Good fit if you already have drawings, PDFs or datasheets.</span>
+                <span class="body-sm text-muted">I translate them into a web-first format.</span>
               </div>
             </article>
 
-            <!-- Tile 5 -->
             <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Grid variants</span>
-                  <span>System</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-mid"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="stack">
-                <h3>Grid library</h3>
+                <h3>Course & education pages</h3>
+                <p class="body-sm text-soft">
+                  Layout built for cohorts, curriculum and outcomes – with content that actually sells the learning
+                  outcome.
+                </p>
                 <div class="tag-row">
-                  <span class="tag">2-col</span>
-                  <span class="tag">3-col</span>
-                  <span class="tag">Auto-fit</span>
+                  <span class="tag">Curriculum grid</span>
+                  <span class="tag">Outcome-first copy</span>
+                  <span class="tag">Enrollment CTA</span>
                 </div>
               </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Demonstrate layout versatility.</span>
-                <span class="body-sm text-muted">Extend with more breakpoints.</span>
-              </div>
-            </article>
-
-            <!-- Tile 6 -->
-            <article class="portfolio-card">
-              <div class="portfolio-thumb">
-                <div class="thumb-header">
-                  <span>Contact layout</span>
-                  <span>CTA</span>
-                </div>
-                <div class="thumb-body">
-                  <div class="thumb-block-main">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                      <div class="line line-short"></div>
-                    </div>
-                  </div>
-                  <div class="thumb-block-side">
-                    <div class="thumb-lines">
-                      <div class="line line-full"></div>
-                      <div class="line line-mid"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="stack">
-                <h3>Contact band</h3>
-                <div class="tag-row">
-                  <span class="tag">Form</span>
-                  <span class="tag">Meta info</span>
-                </div>
-              </div>
-
-              <div class="card-footer-row">
-                <span class="body-sm text-muted">Paired with CTA metrics below.</span>
-                <a href="#contact" class="link-pill">
-                  <span>Scroll to contact</span>
-                  <span>↓</span>
-                </a>
+              <div class="card-footer-row mt-md">
+                <span class="body-sm text-muted">Helpful if you offer coaching, digital products or training.</span>
               </div>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- Timeline -->
+      <!-- PROCESS / DELIVERY TIMELINE -->
       <section id="timeline" class="section-soft">
         <div class="container stack-xl">
           <header class="section-header">
             <div class="section-title-block">
-              <span class="eyebrow">Delivery timeline</span>
-              <h2>Step-based rail with markers and dual-column cards.</h2>
+              <span class="eyebrow">Delivery process</span>
+              <h2>From first call to launch – a predictable, five-step model.</h2>
               <p class="body-lg">
-                Use this to visualise your engagement model: discovery, architecture, delivery, and handover. Again,
-                copy cards to grow detail.
+                My process is intentionally simple. You always know what happens next, what I need from you, and
+                when you can expect a concrete result.
               </p>
             </div>
             <div class="section-meta">
-              <span class="pill">Left rail</span>
-              <span class="pill">Right grid</span>
+              <span class="pill">Discovery → Architecture → Design & content → Build → Launch</span>
             </div>
           </header>
 
@@ -2007,33 +1602,35 @@
               <div class="timeline-line"></div>
               <div class="timeline-marker">
                 <div class="timeline-marker-circle"></div>
-                <div class="timeline-label">Phase markers</div>
+                <div class="timeline-label">Alignment</div>
                 <div class="body-sm text-soft">
-                  One marker per phase. Add new markers as needed to scale the process.
+                  We start by agreeing on goals, constraints, and scope. No endless workshops – a focused discussion.
                 </div>
               </div>
               <div class="timeline-marker">
                 <div class="timeline-marker-circle"></div>
-                <div class="timeline-label">Delivery checkpoints</div>
+                <div class="timeline-label">Execution</div>
                 <div class="body-sm text-soft">
-                  Each card on the right references a marker here.
+                  Then I move through architecture, content and implementation in fast, visible iterations.
                 </div>
               </div>
             </aside>
 
             <div class="timeline-grid">
-              <!-- Card 1 -->
+              <!-- Step 1 -->
               <article class="timeline-card">
                 <div class="stack">
-                  <div class="eyebrow">01 – Discovery</div>
-                  <h3>Context framing</h3>
+                  <div class="eyebrow">01 – Discovery & goals</div>
+                  <h3>Context, stakes and constraints.</h3>
                   <p class="body-sm">
-                    High-level constraints, target platforms, and systemic requirements captured in a compact grid.
+                    45–60 minute call. We map your current situation, target audience, offers and technical constraints
+                    (hosting, existing brand, content sources).
                   </p>
                   <div class="timeline-badge-row">
-                    <span class="mini-pill">System map</span>
-                    <span class="mini-pill">Stakeholder grid</span>
-                    <span class="level-pill">Architect-led</span>
+                    <span class="mini-pill">Goals & metrics</span>
+                    <span class="mini-pill">Target users</span>
+                    <span class="mini-pill">Existing assets</span>
+                    <span class="level-pill">You + me</span>
                   </div>
                 </div>
                 <div class="grid grid-2">
@@ -2053,19 +1650,20 @@
                 </div>
               </article>
 
-              <!-- Card 2 -->
+              <!-- Step 2 -->
               <article class="timeline-card">
                 <div class="stack">
                   <div class="eyebrow">02 – Architecture</div>
-                  <h3>Layout system design</h3>
+                  <h3>Page map & layout matrix.</h3>
                   <p class="body-sm">
-                    Mapping page templates, component primitives, and breakpoint rules into a single layout language.
+                    I design the structure: which pages exist, how they connect, and what each page is responsible for.
+                    Deliverable is a clear architecture document and static layout previews.
                   </p>
                   <div class="timeline-badge-row">
-                    <span class="mini-pill">Templates</span>
-                    <span class="mini-pill">Components</span>
-                    <span class="mini-pill">Tokens</span>
-                    <span class="level-pill">Systemic</span>
+                    <span class="mini-pill">Sitemap</span>
+                    <span class="mini-pill">Page roles</span>
+                    <span class="mini-pill">Layout matrix</span>
+                    <span class="level-pill">Architecture-first</span>
                   </div>
                 </div>
                 <div class="grid grid-2">
@@ -2085,18 +1683,20 @@
                 </div>
               </article>
 
-              <!-- Card 3 -->
+              <!-- Step 3 -->
               <article class="timeline-card">
                 <div class="stack">
-                  <div class="eyebrow">03 – Implementation</div>
-                  <h3>Static build</h3>
+                  <div class="eyebrow">03 – Design & content</div>
+                  <h3>Offer-driven copy and visual direction.</h3>
                   <p class="body-sm">
-                    Delivering HTML/CSS shells that can be wired to any front-end framework or CMS.
+                    Using my Adobe design, content and marketing training, I define the visual language and
+                    draft the key messages, offers, headlines and CTAs for every page.
                   </p>
                   <div class="timeline-badge-row">
-                    <span class="mini-pill">Static assets</span>
-                    <span class="mini-pill">No JS</span>
-                    <span class="mini-pill">Framework agnostic</span>
+                    <span class="mini-pill">Visual direction</span>
+                    <span class="mini-pill">Headline system</span>
+                    <span class="mini-pill">Offer hierarchy</span>
+                    <span class="level-pill">Adobe-backed workflow</span>
                   </div>
                 </div>
                 <div class="grid grid-2">
@@ -2116,18 +1716,20 @@
                 </div>
               </article>
 
-              <!-- Card 4 -->
+              <!-- Step 4 -->
               <article class="timeline-card">
                 <div class="stack">
-                  <div class="eyebrow">04 – Handover</div>
-                  <h3>Integration-ready spec</h3>
+                  <div class="eyebrow">04 – Build</div>
+                  <h3>Static implementation & testing.</h3>
                   <p class="body-sm">
-                    Annotated breakpoints, spacing rules, and component states, expressed as layouts not prose.
+                    I build the site as clean HTML/CSS, tuned for performance, accessibility basics and responsive
+                    behaviour. We review on a real staging URL, not in screenshots.
                   </p>
                   <div class="timeline-badge-row">
-                    <span class="mini-pill">Annotation</span>
-                    <span class="mini-pill">Breakpoints</span>
-                    <span class="mini-pill">Dev-ready</span>
+                    <span class="mini-pill">Responsive checks</span>
+                    <span class="mini-pill">SEO basics</span>
+                    <span class="mini-pill">Staging link</span>
+                    <span class="level-pill">Ready to deploy</span>
                   </div>
                 </div>
                 <div class="grid grid-2">
@@ -2141,6 +1743,38 @@
                     <div class="placeholder-inner">
                       <div class="line line-mid"></div>
                       <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Step 5 -->
+              <article class="timeline-card">
+                <div class="stack">
+                  <div class="eyebrow">05 – Launch & optimisation</div>
+                  <h3>From “live” to learning.</h3>
+                  <p class="body-sm">
+                    Once live, we connect analytics and define a simple improvement loop: which actions matter,
+                    what we measure and which small layout or copy changes we try first.
+                  </p>
+                  <div class="timeline-badge-row">
+                    <span class="mini-pill">Analytics</span>
+                    <span class="mini-pill">A/B ideas</span>
+                    <span class="mini-pill">Campaign hooks</span>
+                    <span class="level-pill">Optional ongoing support</span>
+                  </div>
+                </div>
+                <div class="grid grid-2">
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-mid"></div>
+                    </div>
+                  </div>
+                  <div class="placeholder-block">
+                    <div class="placeholder-inner">
+                      <div class="line line-full"></div>
+                      <div class="line line-short"></div>
                     </div>
                   </div>
                 </div>
@@ -2150,32 +1784,32 @@
         </div>
       </section>
 
-      <!-- Dashboard / App layout -->
+      <!-- DELIVERABLES / DASHBOARD VIEW -->
       <section id="dashboard" class="section">
         <div class="container stack-xl">
           <header class="section-header">
             <div class="section-title-block">
-              <span class="eyebrow">Dashboard layout</span>
-              <h2>Sidebar navigation, filters, and kanban-style board.</h2>
+              <span class="eyebrow">Deliverables</span>
+              <h2>What you actually receive at the end of the project.</h2>
               <p class="body-lg">
-                App-like layout without any JavaScript. Use it to demonstrate how your static architecture maps to real
-                product UIs.
+                Below is a visual metaphor of the deliverables: architecture, layouts and content captured in a way
+                that any developer – or just a static host – can use.
               </p>
             </div>
             <div class="section-meta">
-              <span class="pill">Sidebar / Header / Board</span>
-              <span class="pill">3× column kanban</span>
+              <span class="pill">Architecture doc</span>
+              <span class="pill">Static HTML/CSS</span>
+              <span class="pill">Content & CTA system</span>
             </div>
           </header>
 
           <div class="dashboard-grid">
             <aside class="sidebar-nav">
               <div class="sidebar-section">
-                <div class="body-sm text-soft">Navigation</div>
-                <div class="sep"></div>
-                <div class="sidebar-link-list">
+                <div class="body-sm text-soft">Project views</div>
+                <div class="mt-sm sidebar-link-list">
                   <div class="sidebar-link active">
-                    <span>Overview</span>
+                    <span>Architecture</span>
                     <span>•</span>
                   </div>
                   <div class="sidebar-link">
@@ -2183,54 +1817,44 @@
                     <span>→</span>
                   </div>
                   <div class="sidebar-link">
-                    <span>Components</span>
+                    <span>Copy system</span>
                     <span>→</span>
                   </div>
                   <div class="sidebar-link">
-                    <span>System</span>
+                    <span>Launch checklist</span>
                     <span>→</span>
                   </div>
                 </div>
               </div>
 
               <div class="sidebar-section">
-                <div class="body-sm text-soft">States</div>
-                <div class="sep"></div>
-                <div class="sidebar-link-list">
+                <div class="body-sm text-soft">Included assets</div>
+                <div class="mt-sm sidebar-link-list">
                   <div class="sidebar-link">
-                    <span>In design</span>
-                    <span>12</span>
+                    <span>Architecture PDF</span>
+                    <span>1</span>
                   </div>
                   <div class="sidebar-link">
-                    <span>In review</span>
-                    <span>6</span>
+                    <span>Static site bundle</span>
+                    <span>1</span>
                   </div>
                   <div class="sidebar-link">
-                    <span>Shipped</span>
-                    <span>24</span>
+                    <span>Copy & CTA sheet</span>
+                    <span>1</span>
                   </div>
                 </div>
               </div>
 
               <div class="sidebar-section">
-                <div class="body-sm text-soft">Breakpoints</div>
-                <div class="sep"></div>
-                <div class="sidebar-link-list">
+                <div class="body-sm text-soft">Optional extras</div>
+                <div class="mt-sm sidebar-link-list">
                   <div class="sidebar-link">
-                    <span>≥ 1200px</span>
-                    <span>Desktop</span>
+                    <span>Analytics setup</span>
+                    <span>+</span>
                   </div>
                   <div class="sidebar-link">
-                    <span>≥ 960px</span>
-                    <span>Large</span>
-                  </div>
-                  <div class="sidebar-link">
-                    <span>≥ 720px</span>
-                    <span>Tablet</span>
-                  </div>
-                  <div class="sidebar-link">
-                    <span>&lt; 720px</span>
-                    <span>Mobile</span>
+                    <span>Campaign landing clone</span>
+                    <span>+</span>
                   </div>
                 </div>
               </div>
@@ -2240,141 +1864,109 @@
               <header class="panel-header">
                 <div class="stack">
                   <span class="eyebrow">Board view</span>
-                  <div class="cluster">
-                    <span class="body-sm text-soft">Static HTML kanban board.</span>
-                  </div>
+                  <span class="body-sm text-soft">Each card is a concrete deliverable or checklist item.</span>
                 </div>
                 <div class="panel-filters">
-                  <span class="filter-pill active">All layouts</span>
-                  <span class="filter-pill">Marketing</span>
-                  <span class="filter-pill">Dashboard</span>
-                  <span class="filter-pill">System</span>
+                  <span class="filter-pill active">All deliverables</span>
+                  <span class="filter-pill">Architecture</span>
+                  <span class="filter-pill">Layouts</span>
+                  <span class="filter-pill">Launch</span>
                 </div>
               </header>
 
               <div class="browser-chrome">
                 <div class="browser-tabs">
-                  <span class="browser-tab active">Board</span>
-                  <span class="browser-tab">Timeline</span>
-                  <span class="browser-tab">Metrics</span>
+                  <span class="browser-tab active">Deliverables</span>
+                  <span class="browser-tab">Checklists</span>
+                  <span class="browser-tab">Ideas</span>
                 </div>
-                <div class="board-grid mt-sm">
-                  <!-- Column 1 -->
-                  <div class="board-column">
-                    <div class="column-header">
-                      <span>Backlog</span>
-                      <span>4</span>
-                    </div>
-                    <div class="ticket-list">
-                      <div class="ticket-card">
-                        <div class="ticket-title-line"></div>
-                        <div class="ticket-meta-row">
-                          <span>Hero refactor</span>
-                          <span>Landing</span>
-                        </div>
-                      </div>
-                      <div class="ticket-card">
-                        <div class="ticket-title-line"></div>
-                        <div class="ticket-meta-row">
-                          <span>Card density</span>
-                          <span>Grid</span>
-                        </div>
-                      </div>
-                      <div class="ticket-card">
-                        <div class="ticket-title-line"></div>
-                        <div class="ticket-meta-row">
-                          <span>Footer variants</span>
-                          <span>System</span>
-                        </div>
-                      </div>
-                      <div class="ticket-card">
-                        <div class="ticket-title-line"></div>
-                        <div class="ticket-meta-row">
-                          <span>Form layout</span>
-                          <span>Contact</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <!-- Column 2 -->
+                <div class="board-grid mt-sm">
                   <div class="board-column">
                     <div class="column-header">
-                      <span>In progress</span>
+                      <span>Architecture</span>
                       <span>3</span>
                     </div>
                     <div class="ticket-list">
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Dashboard shell</span>
-                          <span>App</span>
+                          <span>Page map & flow</span>
+                          <span>PDF</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Timeline rail</span>
-                          <span>Process</span>
+                          <span>Layout matrix</span>
+                          <span>PNG</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>CTA band</span>
-                          <span>Marketing</span>
+                          <span>Component list</span>
+                          <span>Text</span>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <!-- Column 3 -->
                   <div class="board-column">
                     <div class="column-header">
-                      <span>Shipped</span>
-                      <span>6</span>
+                      <span>Implementation</span>
+                      <span>3</span>
                     </div>
                     <div class="ticket-list">
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Portfolio grid</span>
-                          <span>Live</span>
+                          <span>Static HTML/CSS bundle</span>
+                          <span>Zip</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Hero pattern</span>
-                          <span>Live</span>
+                          <span>Deployment notes</span>
+                          <span>Doc</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Timeline</span>
-                          <span>Live</span>
+                          <span>Change log</span>
+                          <span>List</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="board-column">
+                    <div class="column-header">
+                      <span>Launch & optimisation</span>
+                      <span>3</span>
+                    </div>
+                    <div class="ticket-list">
+                      <div class="ticket-card">
+                        <div class="ticket-title-line"></div>
+                        <div class="ticket-meta-row">
+                          <span>Analytics checklist</span>
+                          <span>Doc</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Contact layout</span>
-                          <span>Live</span>
+                          <span>First A/B test ideas</span>
+                          <span>List</span>
                         </div>
                       </div>
                       <div class="ticket-card">
                         <div class="ticket-title-line"></div>
                         <div class="ticket-meta-row">
-                          <span>Navigation</span>
-                          <span>Live</span>
-                        </div>
-                      </div>
-                      <div class="ticket-card">
-                        <div class="ticket-title-line"></div>
-                        <div class="ticket-meta-row">
-                          <span>Footer</span>
-                          <span>Live</span>
+                          <span>Campaign landing variant</span>
+                          <span>Optional</span>
                         </div>
                       </div>
                     </div>
@@ -2383,92 +1975,95 @@
               </div>
 
               <footer class="panel-header">
-                <span class="body-sm text-muted">All interactions are implied, no JavaScript – pure structural
-                  showcase.</span>
-                <span class="body-sm text-muted">Extend columns or tickets to increase density.</span>
+                <span class="body-sm text-muted">
+                  The point: you leave with architecture, implementation and a simple growth plan – not just a pretty
+                  homepage.
+                </span>
+                <span class="body-sm text-muted">
+                  All assets are framework-agnostic and can be integrated by any developer.
+                </span>
               </footer>
             </section>
           </div>
         </div>
       </section>
 
-      <!-- CTA & Contact -->
+      <!-- CTA & CONTACT -->
       <section id="contact" class="section-soft">
         <div class="container stack-xl">
-
           <header class="section-header">
             <div class="section-title-block">
-              <span class="eyebrow">Contact & metrics</span>
-              <h2>CTA band combined with a compact contact layout.</h2>
+              <span class="eyebrow">Contact & pricing</span>
+              <h2>One clear package – architecture, build and launch-ready site.</h2>
               <p class="body-lg">
-                Final block combines a marketing CTA, small metric grid, and a simple contact layout.
+                I currently take on a limited number of projects at a time. If this way of working fits your needs,
+                send a short description of your business and goals – I will respond with a concrete starting proposal.
               </p>
             </div>
             <div class="section-meta">
-              <span class="pill">Contact band</span>
-              <span class="pill">Same width as dashboard</span>
+              <span class="pill">Architecture-driven</span>
+              <span class="pill">Fixed scope, transparent pricing</span>
             </div>
           </header>
 
           <div class="cta-band">
             <div class="cta-band-inner">
-              <!-- VASEN PUOLI: CTA + METRIIKAT -->
               <div class="cta-copy">
                 <span class="chip">
                   <span class="chip-dot"></span>
                   <span>Static architecture sample</span>
                 </span>
-                <h3>Need a layout-first HTML baseline?</h3>
+                <h3>Want a layout-first baseline for your next site?</h3>
                 <p class="body-sm">
-                  This single file already contains multiple page types. Split it into individual documents,
-                  wire it to your stack, or use it as a visual deliverable in proposals.
+                  This page is built from the same static library you would receive: hero, layouts, process,
+                  deliverables and a contact band. It can be adapted to your brand, content and language.
                 </p>
 
                 <div class="hero-cta-row mt-sm">
                   <a href="#top" class="btn btn-primary">
                     <span>Jump to hero</span>
                   </a>
-                  <a href="#portfolio" class="btn btn-ghost">
-                    <span>Revisit portfolio grid</span>
+                  <a href="#timeline" class="btn btn-ghost">
+                    <span>Review process again</span>
                   </a>
                 </div>
 
                 <div class="cta-matrix mt-md">
                   <div class="metric-block">
-                    <span class="metric-label">Page archetypes</span>
-                    <span class="metric-value">4 core types</span>
-                  </div>
-                  <div class="metric-block">
-                    <span class="metric-label">Grid variants</span>
-                    <span class="metric-value">2 / 3 / 4 / auto-fit</span>
-                  </div>
-                  <div class="metric-block">
-                    <span class="metric-label">Patterns</span>
-                    <span class="metric-value">Hero, cards, rail, board</span>
+                    <span class="metric-label">Core pages</span>
+                    <span class="metric-value">1–4 layouts</span>
                   </div>
                   <div class="metric-block">
                     <span class="metric-label">Tech</span>
                     <span class="metric-value">HTML + CSS only</span>
                   </div>
                   <div class="metric-block">
-                    <span class="metric-label">Focus</span>
-                    <span class="metric-value">Layout</span>
+                    <span class="metric-label">Timeline</span>
+                    <span class="metric-value">2–4 weeks</span>
                   </div>
                   <div class="metric-block">
-                    <span class="metric-label">Scalability</span>
-                    <span class="metric-value">Duplicate blocks</span>
+                    <span class="metric-label">Focus</span>
+                    <span class="metric-value">Clarity & conversion</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Ownership</span>
+                    <span class="metric-value">You own everything</span>
+                  </div>
+                  <div class="metric-block">
+                    <span class="metric-label">Extensibility</span>
+                    <span class="metric-value">Easy to clone & grow</span>
                   </div>
                 </div>
               </div>
 
-              <!-- OIKEA PUOLI: CONTACT ME -KORTTI -->
               <aside class="card-outline contact-wide">
                 <div class="contact-wide-inner">
-
                   <div class="contact-block contact-main">
                     <span class="eyebrow">Contact me</span>
                     <h3 class="mt-sm">Matias Putkonen</h3>
-                    <p class="body-sm text-soft mt-sm">Kuopio, Finland</p>
+                    <p class="body-sm text-soft mt-sm">
+                      Kuopio, Finland
+                    </p>
                   </div>
 
                   <div class="contact-block contact-phone">
@@ -2490,46 +2085,90 @@
                   </div>
 
                   <div class="contact-block contact-website">
-                    <div class="body-sm text-muted">Need a website?</div>
-                    <div class="pricing-text body-sm text-soft">
-                      <span class="pricing-amount">Clean, tailored websites delivered on a fast schedule.</span>
+                    <div class="body-sm text-muted">Project package</div>
+                    <p class="body-sm text-soft mt-sm">
+                      Clean, tailored website delivered on a fast schedule – based on a clear architecture and
+                      future-ready layout system.
+                    </p>
 
-                      <div class="pricing-grid mt-sm">
-                        <div class="pricing-label body-sm text-muted">Price:</div>
-                        <div class="pricing-text body-sm text-soft">
-                          <span class="pricing-amount">700 €</span>
-                          <span>(design, production, publication)</span>
-                        </div>
+                    <div class="pricing-grid">
+                      <div class="pricing-label body-sm text-muted">Price</div>
+                      <div class="pricing-text body-sm text-soft">
+                        <span class="pricing-amount">700 €</span>
+                        <span>(architecture, design, implementation, launch)</span>
+                      </div>
 
-                        <div class="pricing-label body-sm text-muted">Maintenance:</div>
-                        <div class="pricing-text body-sm text-soft">
-                          <span class="pricing-amount">300 €/month</span>
-                          <span>(updates and ongoing management)</span>
-                        </div>
+                      <div class="pricing-label body-sm text-muted">Maintenance</div>
+                      <div class="pricing-text body-sm text-soft">
+                        <span class="pricing-amount">300 €/month</span>
+                        <span>(updates, minor changes, technical monitoring)</span>
+                      </div>
 
-                        <div class="pricing-text body-sm text-soft"><br>
-                          All prices are VAT 0%.
-                        </div>
+                      <div class="pricing-label body-sm text-muted">VAT</div>
+                      <div class="pricing-text body-sm text-soft">
+                        All prices are VAT 0%.
                       </div>
                     </div>
-
                   </div>
-
                 </div>
-      </section>
 
-      <!-- Footer -->
-      <footer class="site-footer">
-        <div class="footer-band">
-          <div class="footer-inner">
-            <!-- Matias / Services / Navigation / Certificates -kolumnit -->
-          </div>
-
-          <div class="footer-bottom">
-            © 2025 Matias Putkonen – All rights reserved.
+                <div class="cluster-between mt-lg">
+                  <span class="body-sm text-muted">Homepages with ease – without losing architectural discipline.</span>
+                  <a href="#top" class="btn btn-ghost"><span>Back to top</span></a>
+                </div>
+              </aside>
+            </div>
           </div>
         </div>
-      </footer>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-band">
+        <div class="footer-inner">
+          <div>
+            <div class="eyebrow">Matias Putkonen</div>
+            <p class="body-sm mt-sm text-soft">
+              Architecture-driven web builds for SMEs and experts.
+              Based in Kuopio, working remotely.
+            </p>
+          </div>
+
+          <div>
+            <div class="body-sm text-muted">Services</div>
+            <p class="body-sm mt-sm text-soft">
+              Architecture & layout systems<br />
+              Static HTML/CSS implementation<br />
+              Offer & CTA copy<br />
+              Optional launch support
+            </p>
+          </div>
+
+          <div>
+            <div class="body-sm text-muted">Credentials</div>
+            <p class="body-sm mt-sm text-soft">
+              Adobe Graphic Designer<br />
+              Adobe Content Creator<br />
+              Adobe Marketing Specialist
+            </p>
+          </div>
+
+          <div>
+            <div class="body-sm text-muted">Next step</div>
+            <p class="body-sm mt-sm text-soft">
+              Send me a short description of your business, current site (if any) and goals.
+              I will reply with a short, concrete proposal and timeline.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          © 2025 Matias Putkonen – All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 
 </html>

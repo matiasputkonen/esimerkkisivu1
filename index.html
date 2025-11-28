@@ -2401,18 +2401,84 @@
               </aside>
 
               <!-- Footer -->
-              <footer class="site-footer">
-                <div class="container footer-inner">
-                  <div>Static layout system – ready to split into multiple showcase pages.</div>
-                  <nav class="footer-links">
-                    <a href="#layouts">Layouts</a>
-                    <a href="#portfolio">Portfolio</a>
-                    <a href="#dashboard">Dashboard</a>
-                    <a href="#contact">Contact</a>
-                  </nav>
-                </div>
-              </footer>
-            </div>
+              .footer {
+              background: linear-gradient(180deg, #0b0f15 0%, #080b11 100%);
+              padding: 4rem 2rem;
+              border-top: 1px solid rgba(160, 77, 238, 0.3);
+              box-shadow: 0 -10px 35px rgba(0,0,0,0.4);
+              }
+
+              .footer-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+              gap: 3rem;
+              margin-bottom: 3rem;
+              }
+
+              .footer-col h3 {
+              color: #a04dee;
+              margin-bottom: 1rem;
+              font-size: 1.15rem;
+              letter-spacing: 0.5px;
+              }
+
+              .footer-col p,
+              .footer-col ul li {
+              color: #c8d0e0;
+              line-height: 1.6;
+              font-size: 0.95rem;
+              }
+
+              .footer-col ul {
+              list-style: none;
+              padding: 0;
+              margin: 0;
+              }
+
+              .footer-col a {
+              color: #8fd4ff;
+              text-decoration: none;
+              }
+
+              .footer-col a:hover {
+              color: #a04dee;
+              }
+
+              .footer-contact span {
+              color: #8da0b6;
+              }
+
+              .verified ul li {
+              position: relative;
+              padding-left: 18px;
+              }
+
+              .verified ul li::before {
+              content: "✓";
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: #3dd68c;
+              font-weight: bold;
+              }
+
+              .cred {
+              color: #8da0b6;
+              margin-top: 0.5rem;
+              font-size: 0.85rem;
+              }
+
+              .footer-bottom {
+              border-top: 1px solid rgba(255,255,255,0.05);
+              padding-top: 1.5rem;
+              text-align: center;
+              }
+
+              .footer-bottom p {
+              color: #64748b;
+              font-size: 0.85rem;
+              }
+
 </body>
 
 </html>

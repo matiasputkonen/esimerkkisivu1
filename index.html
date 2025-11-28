@@ -1178,11 +1178,26 @@
 
     /* CTA section */
 
+    .cta-section-full {
+      padding-block: 4rem;
+      background: #020617;
+      /* sama tausta kuin muissa dark-sektioissa */
+    }
+
     .cta-band {
-      border-radius: 1.8rem;
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      background: radial-gradient(circle at top left, rgba(22, 163, 74, 0.18), rgba(15, 23, 42, 0.98));
-      padding: 1.6rem 1.5rem;
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      /* jos haluat kulmat kiinni reunoihin */
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid rgba(55, 65, 81, 0.95);
+      border-bottom: 1px solid rgba(55, 65, 81, 0.95);
+      background: radial-gradient(circle at top left,
+          rgba(22, 163, 74, 0.18),
+          rgba(15, 23, 42, 0.98));
+      padding: 2rem clamp(1.5rem, 4vw, 3rem);
+      /* responsiiviset sivutyynyt */
       display: grid;
       grid-template-columns: 1.4fr 1fr;
       gap: 1.5rem;
@@ -1206,14 +1221,11 @@
       position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      /* yksi leveä palsta */
       gap: 1.5rem;
     }
 
     @media (max-width: 960px) {
-
-      .cta-band,
-      .cta-band-inner {
+      .cta-band {
         grid-template-columns: minmax(0, 1fr);
       }
     }

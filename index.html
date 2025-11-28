@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
   <meta charset="UTF-8" />
   <title>Home</title>
@@ -38,7 +39,8 @@
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       scroll-behavior: smooth;
     }
@@ -120,6 +122,7 @@
     }
 
     @media (max-width: 960px) {
+
       .grid-2,
       .grid-3,
       .grid-4 {
@@ -201,7 +204,10 @@
 
     /* Typography */
 
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
       font-weight: 600;
       letter-spacing: 0.03em;
     }
@@ -256,12 +262,10 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.96),
-        rgba(255, 255, 255, 0.85),
-        transparent
-      );
+      background: linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.96),
+          rgba(255, 255, 255, 0.85),
+          transparent);
       border-bottom: 1px solid rgb(218, 138, 255);
     }
 
@@ -283,14 +287,12 @@
       width: 32px;
       height: 32px;
       border-radius: 0.9rem;
-      background: conic-gradient(
-        from 140deg,
-        #22c55e,
-        #22c55e,
-        #38bdf8,
-        #6366f1,
-        #22c55e
-      );
+      background: conic-gradient(from 140deg,
+          #22c55e,
+          #22c55e,
+          #38bdf8,
+          #6366f1,
+          #22c55e);
       position: relative;
       box-shadow: 0 0 18px rgba(34, 197, 94, 0.6);
     }
@@ -507,11 +509,9 @@
     .matrix-card {
       border-radius: 1.1rem;
       padding: 0.85rem 0.9rem;
-      background: linear-gradient(
-        145deg,
-        rgba(15, 23, 42, 0.95),
-        rgba(15, 23, 42, 0.7)
-      );
+      background: linear-gradient(145deg,
+          rgba(15, 23, 42, 0.95),
+          rgba(15, 23, 42, 0.7));
       border: 1px solid rgba(31, 41, 55, 0.9);
       box-shadow: 0 18px 35px rgba(15, 23, 42, 0.9);
       display: flex;
@@ -579,6 +579,7 @@
       .hero-inner {
         grid-template-columns: minmax(0, 1fr);
       }
+
       .hero-matrix-inner {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -731,14 +732,12 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(
-        120deg,
-        transparent 0,
-        transparent 35%,
-        rgba(55, 65, 81, 0.55) 50%,
-        transparent 65%,
-        transparent 100%
-      );
+      background-image: linear-gradient(120deg,
+          transparent 0,
+          transparent 35%,
+          rgba(55, 65, 81, 0.55) 50%,
+          transparent 65%,
+          transparent 100%);
       transform: translateX(-100%);
       animation: shimmer 3.5s infinite;
       opacity: 0.7;
@@ -795,6 +794,7 @@
       .layout-gallery {
         grid-template-columns: minmax(0, 1fr);
       }
+
       .browser-grid {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -871,13 +871,11 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(
-        45deg,
-        rgba(37, 99, 235, 0.2),
-        transparent 40%,
-        transparent 60%,
-        rgba(34, 197, 94, 0.18)
-      );
+      background-image: linear-gradient(45deg,
+          rgba(37, 99, 235, 0.2),
+          transparent 40%,
+          transparent 60%,
+          rgba(34, 197, 94, 0.18));
       mix-blend-mode: screen;
       opacity: 0.7;
     }
@@ -1216,6 +1214,7 @@
     }
 
     @media (max-width: 960px) {
+
       .cta-band,
       .cta-band-inner {
         grid-template-columns: minmax(0, 1fr);
@@ -1300,10 +1299,21 @@
 
     /* Utility */
 
-    .mt-sm { margin-top: 0.5rem; }
-    .mt-md { margin-top: 1rem; }
-    .mt-lg { margin-top: 1.5rem; }
-    .mt-xl { margin-top: 2rem; }
+    .mt-sm {
+      margin-top: 0.5rem;
+    }
+
+    .mt-md {
+      margin-top: 1rem;
+    }
+
+    .mt-lg {
+      margin-top: 1.5rem;
+    }
+
+    .mt-xl {
+      margin-top: 2rem;
+    }
 
     .sep {
       height: 1px;
@@ -1312,6 +1322,7 @@
     }
   </style>
 </head>
+
 <body class="surface">
   <div class="page-shell">
     <!-- Header -->
@@ -1351,7 +1362,8 @@
             <div class="hero-title-row">
               <h1>Composed layouts for complex digital products.</h1>
               <p class="body-lg">
-                Minimal content, maximal structure. Sectioned, grid-based, dashboard-like and marketing-grade layouts in a single cohesive system.
+                Minimal content, maximal structure. Sectioned, grid-based, dashboard-like and marketing-grade layouts in
+                a single cohesive system.
               </p>
             </div>
 
@@ -1478,7 +1490,8 @@
                   </div>
                 </div>
 
-                <div class="grid two-column" style="margin-top: 1rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem;">
+                <div class="grid two-column"
+                  style="margin-top: 1rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1rem;">
                   <div class="placeholder-block">
                     <div class="placeholder-inner">
                       <div class="line line-mid"></div>
@@ -1551,7 +1564,8 @@
                 <span class="eyebrow">Pattern usage</span>
                 <h3>Turn blocks into standalone pages.</h3>
                 <p class="body-sm">
-                  Each pattern is a complete, self-contained layout fragment. Copy, paste, and extend to build standalone hero pages, marketing pages, or app shells.
+                  Each pattern is a complete, self-contained layout fragment. Copy, paste, and extend to build
+                  standalone hero pages, marketing pages, or app shells.
                 </p>
               </div>
 
@@ -1591,7 +1605,8 @@
               <span class="eyebrow">Portfolio grid</span>
               <h2>Project tiles with nested layout previews.</h2>
               <p class="body-lg">
-                Each tile is a miniature page: browser chrome, grid, cards, and tags. Duplicate rows to scale line count and visual density.
+                Each tile is a miniature page: browser chrome, grid, cards, and tags. Duplicate rows to scale line count
+                and visual density.
               </p>
             </div>
             <div class="section-meta">
@@ -1861,7 +1876,8 @@
               <span class="eyebrow">Delivery timeline</span>
               <h2>Step-based rail with markers and dual-column cards.</h2>
               <p class="body-lg">
-                Use this to visualise your engagement model: discovery, architecture, delivery, and handover. Again, copy cards to grow detail.
+                Use this to visualise your engagement model: discovery, architecture, delivery, and handover. Again,
+                copy cards to grow detail.
               </p>
             </div>
             <div class="section-meta">
@@ -2026,7 +2042,8 @@
               <span class="eyebrow">Dashboard layout</span>
               <h2>Sidebar navigation, filters, and kanban-style board.</h2>
               <p class="body-lg">
-                App-like layout without any JavaScript. Use it to demonstrate how your static architecture maps to real product UIs.
+                App-like layout without any JavaScript. Use it to demonstrate how your static architecture maps to real
+                product UIs.
               </p>
             </div>
             <div class="section-meta">
@@ -2250,7 +2267,8 @@
               </div>
 
               <footer class="panel-header">
-                <span class="body-sm text-muted">All interactions are implied, no JavaScript – pure structural showcase.</span>
+                <span class="body-sm text-muted">All interactions are implied, no JavaScript – pure structural
+                  showcase.</span>
                 <span class="body-sm text-muted">Extend columns or tickets to increase density.</span>
               </footer>
             </section>
@@ -2266,7 +2284,8 @@
               <span class="eyebrow">Contact & metrics</span>
               <h2>CTA band combined with a compact contact layout.</h2>
               <p class="body-lg">
-                Final block combines a marketing CTA, small metric grid, and a simple contact form layout. This closes the “full page” story.
+                Final block combines a marketing CTA, small metric grid, and a simple contact form layout. This closes
+                the “full page” story.
               </p>
             </div>
             <div class="section-meta">
@@ -2284,7 +2303,8 @@
                 </span>
                 <h3>Need a layout-first HTML baseline?</h3>
                 <p class="body-sm">
-                  This single file already contains multiple page types. Split it into individual documents, wire it to your stack, or use it as a visual deliverable in proposals.
+                  This single file already contains multiple page types. Split it into individual documents, wire it to
+                  your stack, or use it as a visual deliverable in proposals.
                 </p>
                 <div class="hero-cta-row mt-sm">
                   <a href="#top" class="btn btn-primary">
@@ -2325,53 +2345,62 @@
 
               <aside class="card-outline stack-lg">
                 <div class="stack">
-                  <span class="eyebrow">Contact layout</span>
-                  <h3>Form shell (no backend wired).</h3>
+                  <span class="eyebrow">Yhteystiedot</span>
+                  <h3>EcoVoltFlow Oy</h3>
                   <p class="body-sm">
-                    Replace placeholder labels with real fields. Keep the two-column split or stack on mobile.
+                    (Lisää katuosoite tähän)<br>
+                    70xxx Kuopio
                   </p>
                 </div>
 
-                <div class="grid grid-2">
-                  <div class="stack">
-                    <div class="body-sm text-muted">Name</div>
-                    <div class="placeholder-block">
-                      <div class="placeholder-inner">
-                        <div class="line line-full"></div>
-                      </div>
-                    </div>
-                    <div class="body-sm text-muted">Email</div>
-                    <div class="placeholder-block">
-                      <div class="placeholder-inner">
-                        <div class="line line-full"></div>
-                      </div>
-                    </div>
-                    <div class="body-sm text-muted">Project type</div>
-                    <div class="placeholder-block">
-                      <div class="placeholder-inner">
-                        <div class="line line-mid"></div>
-                      </div>
-                    </div>
+                <div class="stack">
+                  <div>
+                    <div class="body-sm text-muted">Puhelin</div>
+                    <p class="body-sm">
+                      <a href="tel:0401234567" style="color:#4ade80; text-decoration:none;">
+                        040 123 4567
+                      </a>
+                    </p>
                   </div>
-                  <div class="stack">
-                    <div class="body-sm text-muted">Short brief</div>
-                    <div class="placeholder-block" style="height: 100%;">
-                      <div class="placeholder-inner">
-                        <div class="line line-full"></div>
-                        <div class="line line-full"></div>
-                        <div class="line line-full"></div>
-                        <div class="line line-mid"></div>
-                      </div>
-                    </div>
+
+                  <div>
+                    <div class="body-sm text-muted">Sähköposti</div>
+                    <p class="body-sm">
+                      <a href="mailto:info@ecovoltflow.fi" style="color:#4ade80; text-decoration:none;">
+                        info@ecovoltflow.fi
+                      </a>
+                    </p>
+                  </div>
+
+                  <div>
+                    <div class="body-sm text-muted">Toimialue</div>
+                    <p class="body-sm text-soft">
+                      Kuopio ja Pohjois-Savo, tarpeen mukaan myös lähialueet sopimuksen mukaan.
+                    </p>
+                  </div>
+
+                  <div>
+                    <div class="body-sm text-muted">Lisätieto</div>
+                    <p class="body-sm text-soft">
+                      Voit olla yhteydessä myös, jos tarvitset asiantuntija-apua tulevan projektin
+                      suunnitteluun tai kustannusarvion laadintaan.
+                    </p>
                   </div>
                 </div>
 
                 <div class="cluster-between">
-                  <span class="body-sm text-muted">No data is sent – purely visual.</span>
+                  <span class="body-sm text-muted">EcoVoltFlow Oy – palveluksessasi.</span>
                   <a href="#top" class="btn btn-ghost">
                     <span>Back to top</span>
                   </a>
                 </div>
+              </aside>
+              <div class="cluster-between">
+                <span class="body-sm text-muted">No data is sent – purely visual.</span>
+                <a href="#top" class="btn btn-ghost">
+                  <span>Back to top</span>
+                </a>
+              </div>
               </aside>
             </div>
           </section>
@@ -2393,4 +2422,5 @@
     </footer>
   </div>
 </body>
+
 </html>

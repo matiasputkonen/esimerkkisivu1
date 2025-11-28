@@ -1192,11 +1192,10 @@
       background: radial-gradient(circle at top left,
           #020617 0,
           #020617 70%);
-      /* tumma, ei vihreä “matto” */
+      /* tumma, ei vihreä matto */
       padding: 1.8rem 1.5rem;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 1.5rem;
+      display: block;
+      /* EI grid – varsinainen grid on cta-band-innerissä */
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
@@ -1216,13 +1215,13 @@
       /* kevyt korostus, ei iso vihreä blokki */
     }
 
+    /* Vasen = CTA, oikea = CONTACT */
     .cta-band-inner {
       position: relative;
       display: grid;
       grid-template-columns: 1.5fr 1fr;
-      /* vasen = CTA, oikea = CONTACT */
       gap: 2rem;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     /* Mobiilissa allekkain */
@@ -1279,12 +1278,38 @@
       border-radius: 1.5rem;
     }
 
+    /* CONTACT-kortin sisäinen grid:
+   vasen sarake = nimi + phone + email
+   oikea sarake = Need a website? */
     .contact-wide-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2rem;
       align-items: flex-start;
-      gap: 2rem;
+    }
+
+    .contact-block {
+      /* tarvittaessa lisäspacingiä tänne */
+    }
+
+    .contact-main {
+      grid-column: 1;
+    }
+
+    .contact-website {
+      grid-column: 2;
+      max-width: 280px;
+    }
+
+    /* Mobiilissa kaikki allekkain */
+    @media (max-width: 720px) {
+      .contact-wide-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-website {
+        grid-column: 1;
+      }
     }
 
     /* Footer */

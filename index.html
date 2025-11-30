@@ -556,7 +556,7 @@
       }
     }
 
-    /* Layout gallery – same structure, tekstit päivitetty */
+    /* Layout gallery */
 
     .layout-gallery {
       display: grid;
@@ -641,7 +641,7 @@
       width: 100%;
     }
 
-    /* Portfolio grid – nyt “Examples of where this works” */
+    /* Portfolio grid – use cases */
 
     .portfolio-grid {
       display: grid;
@@ -715,7 +715,7 @@
       transform: translateY(-1px);
     }
 
-    /* Timeline – sinun prosessi */
+    /* Timeline – process */
 
     .timeline {
       position: relative;
@@ -816,7 +816,7 @@
       background: rgba(22, 163, 74, 0.08);
     }
 
-    /* Dashboard section – unchanged structurally, tekstit päivitetty kevyesti */
+    /* Dashboard section – deliverables */
 
     .dashboard-grid {
       display: grid;
@@ -1105,8 +1105,6 @@
       align-items: flex-start;
     }
 
-    .contact-block {}
-
     .contact-main {
       grid-column: 1;
       grid-row: 1;
@@ -1243,10 +1241,137 @@
     .mt-xl {
       margin-top: 2rem;
     }
+
+    /* === COOKIE BANNER === */
+
+    .cookie-banner {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 50;
+      padding: 1rem 1.25rem;
+      pointer-events: none;
+    }
+
+    .cookie-banner-inner {
+      pointer-events: auto;
+      max-width: 900px;
+      margin-inline: auto;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      background: radial-gradient(circle at top left,
+          rgba(15, 23, 42, 0.98),
+          rgba(15, 23, 42, 0.94));
+      box-shadow: var(--shadow-soft);
+      padding: 1.2rem 1.4rem;
+      display: grid;
+      grid-template-columns: 1.6fr auto;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .cookie-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .cookie-text {
+      color: var(--muted-soft);
+    }
+
+    .cookie-links {
+      margin-top: 0.35rem;
+      font-size: 0.78rem;
+    }
+
+    .cookie-links a {
+      color: #a5b4fc;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: flex-end;
+    }
+
+    .cookie-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.98);
+      color: var(--muted);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease, border 0.12s ease;
+    }
+
+    .cookie-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(148, 163, 184, 0.9);
+    }
+
+    .cookie-btn--primary {
+      background: radial-gradient(circle at top left, #22c55e, #16a34a 40%, #22c55e 80%);
+      border-color: rgba(34, 197, 94, 0.85);
+      color: #022c22;
+      font-weight: 600;
+      box-shadow: 0 16px 32px rgba(34, 197, 94, 0.45);
+    }
+
+    .cookie-btn--primary:hover {
+      box-shadow: 0 20px 40px rgba(34, 197, 94, 0.6);
+    }
+
+    .cookie-hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 720px) {
+      .cookie-banner-inner {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.1rem 1.15rem;
+      }
+
+      .cookie-actions {
+        justify-content: flex-start;
+      }
+    }
   </style>
 </head>
 
 <body class="surface">
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" class="cookie-banner cookie-hidden" role="dialog" aria-modal="true"
+    aria-label="Evästeilmoitus">
+    <div class="cookie-banner-inner">
+      <div>
+        <div class="cookie-title">Käytämme evästeitä</div>
+        <p class="cookie-text">
+          Sivusto käyttää välttämättömiä evästeitä toimiakseen sekä analyytiikkaevästeitä,
+          joilla parannamme sisältöä ja mittaamme kävijäliikennettä. Voit hyväksyä kaikki
+          evästeet tai sallia vain välttämättömät.
+        </p>
+        <p class="cookie-links">
+          Voit muuttaa valintaasi myöhemmin tyhjentämällä selaimen evästeet.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button type="button" class="cookie-btn" id="cookie-decline">
+          Vain välttämättömät
+        </button>
+        <button type="button" class="cookie-btn cookie-btn--primary" id="cookie-accept">
+          Hyväksy kaikki
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END COOKIE BANNER -->
+
   <div class="page-shell">
     <!-- Header -->
     <header class="site-header">
@@ -2169,6 +2294,50 @@
       </div>
     </footer>
   </div>
+
+  <!-- COOKIE SCRIPT -->
+  <script>
+    (function () {
+      var banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+
+      var consent = null;
+      try {
+        consent = window.localStorage.getItem('cookieConsent');
+      } catch (e) {
+        consent = null;
+      }
+
+      if (!consent) {
+        banner.classList.remove('cookie-hidden');
+      }
+
+      var acceptBtn = document.getElementById('cookie-accept');
+      var declineBtn = document.getElementById('cookie-decline');
+
+      function setConsent(value) {
+        try {
+          window.localStorage.setItem('cookieConsent', value);
+        } catch (e) {
+          // localStorage ei pakollinen
+        }
+        banner.classList.add('cookie-hidden');
+      }
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', function () {
+          setConsent('all');
+        });
+      }
+
+      if (declineBtn) {
+        declineBtn.addEventListener('click', function () {
+          setConsent('necessary');
+        });
+      }
+    })();
+  </script>
+  <!-- END COOKIE SCRIPT -->
 </body>
 
 </html>
